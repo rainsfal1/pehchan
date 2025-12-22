@@ -1,6 +1,6 @@
 
 **/doc/api/
-.idea/** 
+.idea/
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
@@ -8,10 +8,13 @@
 .packages
 .pub-cache/
 .pub/
-.vscode/** */
+.vscode/
 build/
 coverage/
 lib/generated_plugin_registrant.dart
+.DS_Store
+**/.DS_Store
+*.iml
 
 # Android related
 **/android/**/gradle-wrapper.jar
