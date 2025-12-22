@@ -1,0 +1,9 @@
+product_name,product_id,barcode,barcode_format,gtin,batch,mfg_date,expiry_date,manufacturer,registration_number,description,mrp
+Pulmonol Cough Syrup 120ml,PKM001,8961101620684,EAN13,08961101620684,,,,Nexpharm Healthcare (Pvt.) Ltd,000874,"A combination cough syrup containing dextromethorphan (cough suppressant) and guaifenesin (expectorant) for relief of cough and chest congestion.",450
+Nuberol Forte Tablets,PKM002,8964001788928,EAN13,08964001788928,,,,Searle (The Searle Company Limited),N/A,"Combination analgesic and muscle relaxant containing paracetamol 650 mg and orphenadrine citrate 50 mg per tablet, used for relief of painful muscle spasm and musculoskeletal pain.",120
+Johar Joshanda (30 Sachets),PKM004,855434009682,EAN13,0855434009682,,,,Qarshi Industries (Pvt.) Ltd,E. No. 00414.0023,"Unani herbal sachets for relief of cold/cough symptoms; dissolve one sachet in hot water or tea and sip slowly.",350
+Quench Plus Cream 15g,PKM005,08961100513888,DATAMATRIX,08961100513888,B019,2025-03,2027-03,Ferozsons Laboratories Limited,000038,"Topical skin cream.",299
+Surbex Tablets 30s,PKM006,,,802981XV,2025-09,2026-11,Abbott,,"Multivitamin supplement containing Zinc, Vitamin E, C, Folic Acid and B-Complex for vitality support.",440
+
+
+

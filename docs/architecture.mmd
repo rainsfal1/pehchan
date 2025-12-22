@@ -1,0 +1,45 @@
++-- High-Level Architecture Diagram
+graph TD
+  %% Style definitions
+  classDef ui fill:#F8F3E7,stroke:#8B7E66,stroke-width:1px,color:#000;
+  classDef ml fill:#E7F2FB,stroke:#4A90E2,stroke-width:1px,color:#000;
+  classDef data fill:#E9F7EF,stroke:#4CAF50,stroke-width:1px,color:#000;
+  classDef service fill:#FDECEF,stroke:#E57373,stroke-width:1px,color:#000;
+  classDef infra fill:#EFEFEF,stroke:#9E9E9E,stroke-width:1px,color:#000;
+
+  %% Nodes
+  UI[Presentation Layer<br/>Flutter UI<br/>Navigation (GoRouter)<br/>Accessibility semantics<br/>TTS controls]:::ui
+  Camera[Camera View<br/>Barcode/OCR pipeline<br/>Live feedback & haptics]:::ui
+  Settings[Settings & Customization<br/>Language/TTS speed<br/>Color/contrast<br/>Demo mode toggle]:::ui
+
+  MLKit[ML Kit<br/>OCR + Barcode]:::ml
+  TFLite[TFLite Packaging Detector<br/>(lightweight model)]:::ml
+  Fusion[Fusion Logic<br/>Confidence & fallback<br/>(barcode → OCR → detector → fuzzy name)]:::ml
+
+  DB[Local SQLite DB<br/>Curated Pakistani meds<br/>Ingredients, warnings, expiry cues]:::data
+  CSV[Local CSV Import<br/>Barcodes/ingredients backup]:::data
+
+  Feedback[Feedback Services<br/>TTS (en default)<br/>Audio cues<br/>Haptics]:::service
+  Updater[Manual Updater (Optional)<br/>DB/Model refresh (consent)]:::service
+
+  Device[On-device, offline-first<br/>Mid-range Android target]:::infra
+
+  %% Edges
+  UI --> Camera
+  Camera --> MLKit
+  Camera --> TFLite
+  MLKit --> Fusion
+  TFLite --> Fusion
+  Fusion --> DB
+  Fusion --> CSV
+  Fusion --> Feedback
+  Settings --> UI
+  Settings --> Feedback
+  Updater -. optional .-> DB
+  Updater -. optional .-> TFLite
+
+  %% Context
+  DB --- Device
+  TFLite --- Device
+  MLKit --- Device
+  Fusion --- Device
