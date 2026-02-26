@@ -1,8 +1,8 @@
-import '../../../../core/pillkaboo_util.dart';
+import '../../../../core/pehchan_util.dart';
 import 'main_menu_page_widget.dart' show MainMenuPageWidget;
 import 'package:flutter/material.dart';
 
-class MainMenuPageModel extends PillKaBooModel<MainMenuPageWidget> {
+class MainMenuPageModel extends PehchanModel<MainMenuPageWidget> {
 
   final unfocusNode = FocusNode();
 

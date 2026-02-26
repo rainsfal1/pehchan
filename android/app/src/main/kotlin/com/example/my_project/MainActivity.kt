@@ -1,4 +1,4 @@
-package com.mycompany.pillkaboo
+package com.mycompany.pehchan
 
 import io.flutter.embedding.android.FlutterActivity
 

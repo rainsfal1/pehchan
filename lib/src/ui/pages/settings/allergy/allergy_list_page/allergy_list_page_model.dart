@@ -1,8 +1,8 @@
-import '../../../../../core/pillkaboo_model.dart';
+import '../../../../../core/pehchan_model.dart';
 import 'allergy_list_page_widget.dart' show AllergyListPageWidget;
 import 'package:flutter/material.dart';
 
-class AllergyListPageModel extends PillKaBooModel<AllergyListPageWidget> {
+class AllergyListPageModel extends PehchanModel<AllergyListPageWidget> {
 
   final unfocusNode = FocusNode();
 

@@ -1,8 +1,8 @@
-import '../../../../core/pillkaboo_model.dart';
+import '../../../../core/pehchan_model.dart';
 import 'help_page_widget.dart' show HelpPageWidget;
 import 'package:flutter/material.dart';
 
-class HelpPageModel extends PillKaBooModel<HelpPageWidget> {
+class HelpPageModel extends PehchanModel<HelpPageWidget> {
 
   final unfocusNode = FocusNode();
 

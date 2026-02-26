@@ -7,7 +7,7 @@ import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:workmanager/workmanager.dart';
 
-import 'src/ui/styles/pillkaboo_theme.dart';
+import 'src/ui/styles/pehchan_theme.dart';
 import 'src/core/internationalization.dart';
 import 'src/nav/nav.dart';
 import 'src/data/local/shared_preference/app_state.dart';
@@ -44,7 +44,7 @@ void main() async {
   WidgetsBinding.instance.addObserver(AppLifecycleReactor());
   usePathUrlStrategy();
 
-  await PillKaBooTheme.initialize();
+  await PehchanTheme.initialize();
 
   // Initialize databases
   await BarcodeDBHelper.database;
@@ -96,7 +96,7 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   Locale? _locale;
-  ThemeMode _themeMode = PillKaBooTheme.themeMode;
+  ThemeMode _themeMode = PehchanTheme.themeMode;
 
   late AppStateNotifier _appStateNotifier;
   late GoRouter _router;
@@ -126,7 +126,7 @@ class MyAppState extends State<MyApp> {
 
   void setThemeMode(ThemeMode mode) => setState(() {
     _themeMode = mode;
-    PillKaBooTheme.saveThemeMode(mode);
+    PehchanTheme.saveThemeMode(mode);
   });
 
   @override

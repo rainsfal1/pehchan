@@ -1,8 +1,8 @@
-import '../../../../core/pillkaboo_model.dart';
+import '../../../../core/pehchan_model.dart';
 import 'settings_menu_page_widget.dart' show SettingsMenuPageWidget;
 import 'package:flutter/material.dart';
 
-class SettingsMenuPageModel extends PillKaBooModel<SettingsMenuPageWidget> {
+class SettingsMenuPageModel extends PehchanModel<SettingsMenuPageWidget> {
 
   final unfocusNode = FocusNode();
 

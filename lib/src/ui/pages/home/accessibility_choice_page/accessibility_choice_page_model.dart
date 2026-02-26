@@ -1,8 +1,8 @@
-import '../../../../core/pillkaboo_util.dart';
+import '../../../../core/pehchan_util.dart';
 import 'accessibility_choice_page_widget.dart' show AccessibilityChoicePageWidget;
 import 'package:flutter/material.dart';
 
-class AccessibilityChoicePageModel extends PillKaBooModel<AccessibilityChoicePageWidget> {
+class AccessibilityChoicePageModel extends PehchanModel<AccessibilityChoicePageWidget> {
 
   final unfocusNode = FocusNode();
 

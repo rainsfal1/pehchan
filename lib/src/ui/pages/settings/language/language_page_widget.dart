@@ -1,7 +1,7 @@
-import 'package:pillkaboo/main.dart';
-import 'package:pillkaboo/src/core/pillkaboo_util.dart';
+import 'package:pehchan/main.dart';
+import 'package:pehchan/src/core/pehchan_util.dart';
 import 'package:go_router/go_router.dart';
-import '../../../styles/pillkaboo_theme.dart';
+import '../../../styles/pehchan_theme.dart';
 import '../../../widgets/index.dart' as widgets;
 
 import 'package:flutter/material.dart';
@@ -80,14 +80,14 @@ class _LanguagePageWidgetState extends State<LanguagePageWidget> {
               loc.getText('language_title').isNotEmpty
                   ? loc.getText('language_title')
                   : 'Language',
-              style: PillKaBooTheme.of(context).headlineMedium.override(
+              style: PehchanTheme.of(context).headlineMedium.override(
                     fontFamily:
-                        PillKaBooTheme.of(context).headlineMediumFamily,
+                        PehchanTheme.of(context).headlineMediumFamily,
                     color: PKBAppState().secondaryColor,
                     fontSize: appBarFontSize,
                     fontWeight: _weightForLocale(context),
                     useGoogleFonts: GoogleFonts.asMap().containsKey(
-                        PillKaBooTheme.of(context).headlineMediumFamily),
+                        PehchanTheme.of(context).headlineMediumFamily),
                   ),
             ),
             ),

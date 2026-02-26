@@ -16,7 +16,7 @@ export 'lat_lng.dart';
 export 'place.dart';
 export 'uploaded_file.dart';
 export '../data/local/shared_preference/app_state.dart';
-export 'pillkaboo_model.dart';
+export 'pehchan_model.dart';
 export 'dart:math' show min, max;
 export 'dart:typed_data' show Uint8List;
 export 'dart:convert' show jsonEncode, jsonDecode;

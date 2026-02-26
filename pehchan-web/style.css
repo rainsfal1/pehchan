@@ -1,0 +1,1374 @@
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Lexend:wght@300;400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap');
+
+/* THEME VARIABLES */
+:root {
+  /* Default Black (Dark) Theme */
+  --bg: #0a0a0a;
+  --text: #ffffff;
+  --text-muted: #888888;
+  --accent: #ffffff;
+  --surface: #141414;
+  --border: rgba(255, 255, 255, 0.1);
+  --btn-text: #000000;
+}
+
+.theme-white {
+  --bg: #ffffff;
+  --text: #0a0a0a;
+  --text-muted: #666666;
+  --accent: #000000;
+  --surface: #f5f5f5;
+  --border: rgba(0, 0, 0, 0.1);
+  --btn-text: #ffffff;
+}
+
+.theme-blue {
+  --bg: #0f172a;
+  /* Slate 900 */
+  --text: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent: #38bdf8;
+  --surface: #1e293b;
+  --border: rgba(255, 255, 255, 0.1);
+  --btn-text: #0f172a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Atkinson Hyperlegible', 'Lexend', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Urdu Typography Mode */
+body.urdu-mode {
+  font-family: 'Noto Nastaliq Urdu', 'Noto Sans Arabic', serif;
+  line-height: 2;
+  letter-spacing: normal;
+}
+
+body.urdu-mode .hero-title {
+  font-size: clamp(2.5rem, 6vw, 6rem);
+  line-height: 1.4;
+  letter-spacing: normal;
+  font-weight: 700;
+}
+
+body.urdu-mode .hero-desc {
+  font-size: clamp(1.1rem, 1.5vw, 1.6rem);
+  line-height: 2.2;
+  font-weight: 400;
+}
+
+body.urdu-mode .feature-headline {
+  font-size: clamp(2rem, 4.5vw, 4.5rem);
+  line-height: 1.6;
+  letter-spacing: normal;
+  font-weight: 700;
+}
+
+body.urdu-mode .feature-body {
+  font-size: 1.2rem;
+  line-height: 2.2;
+  font-weight: 400;
+}
+
+body.urdu-mode .massive-text {
+  font-size: clamp(2.5rem, 6vw, 6rem);
+  line-height: 1.5;
+  letter-spacing: normal;
+  font-weight: 700;
+}
+
+body.urdu-mode .btn-primary {
+  font-size: 1.1rem;
+  letter-spacing: normal;
+  padding: 1.5rem 2.5rem;
+}
+
+body.urdu-mode .slide-title {
+  font-size: 1.2rem;
+  letter-spacing: normal;
+  line-height: 1.8;
+}
+
+body.urdu-mode .lang-btn,
+body.urdu-mode .test-audio-btn {
+  font-size: 1.1rem;
+  letter-spacing: normal;
+  padding: 1rem 2rem;
+}
+
+body.urdu-mode .reader-label,
+body.urdu-mode .reader-value {
+  font-size: 0.95rem;
+  letter-spacing: normal;
+}
+
+body.urdu-mode .spec-title {
+  font-size: 0.95rem;
+  letter-spacing: normal;
+}
+
+body.urdu-mode .spec-list li,
+body.urdu-mode .spec-desc {
+  font-size: 1.3rem;
+  line-height: 2;
+}
+
+body.urdu-mode .ui-pill {
+  font-size: 0.8rem;
+  letter-spacing: normal;
+  padding: 0.6rem 1.2rem;
+}
+
+body.urdu-mode .ui-slider-value {
+  font-size: 0.9rem;
+  letter-spacing: normal;
+}
+
+body.urdu-mode .logo {
+  font-size: 1.3rem;
+  letter-spacing: normal;
+}
+
+body.urdu-mode .nav-link span {
+  font-size: 0.9rem;
+  letter-spacing: normal;
+}
+
+body.urdu-mode .btn-clean {
+  font-size: 1rem;
+  letter-spacing: normal;
+}
+
+body.urdu-mode .footer-bottom {
+  font-size: 0.95rem;
+}
+
+/* Typography Utilities */
+.text-gray {
+  color: var(--text-muted);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mb-lg {
+  margin-bottom: 4rem;
+}
+
+.massive-text {
+  font-size: clamp(3rem, 7vw, 7rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.border-top {
+  border-top: 1px solid var(--border);
+}
+
+.container {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 4vw;
+}
+
+/* Header */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 2rem 4vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  mix-blend-mode: difference;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: 0.1em;
+}
+
+.header-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  transition: opacity 0.3s ease;
+}
+
+.nav-link:hover {
+  opacity: 0.7;
+}
+
+/* Minimalist Hero Section */
+.hero {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 18vh 4vw 5vh 4vw;
+}
+
+.hero-actions {
+  margin-top: 2rem;
+}
+
+/* -------------------
+   HERO BUTTON CTA
+   ------------------- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: var(--text);
+  color: var(--btn-text);
+  padding: 1.5rem 2.5rem;
+  /* Slightly smaller padding for a sleeker look */
+  border-radius: 100px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
+  /* Softer initial glow */
+  margin: 0;
+}
+
+.btn-arrow {
+  width: 40px;
+  height: 40px;
+  background: var(--bg);
+  color: var(--text);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-primary:hover .btn-arrow {
+  transform: translateY(5px);
+  /* Animate downward since arrow is pointing down */
+}
+
+/* Statement Section */
+.statement {
+  padding: 15vh 0;
+}
+
+.statement-desc {
+  margin-top: 4rem;
+  font-size: clamp(1.2rem, 2vw, 2rem);
+  color: var(--text-muted);
+  max-width: 800px;
+  font-weight: 300;
+}
+
+/* Feature Stories */
+.feature-story {
+  padding: 15vh 0;
+}
+
+.feature-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 8vw;
+}
+
+.feature-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.feature-info {
+  margin-top: 0;
+}
+
+.feature-headline {
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.05em;
+  color: var(--text);
+}
+
+.feature-body {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 400px;
+}
+
+.feature-visual {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+/* Minimalist UI Mockups */
+.ui-mockup {
+  width: 100%;
+  max-width: 550px;
+  height: 550px;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.02);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-top: 0;
+}
+
+.ui-mockup.row {
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+}
+
+/* 01 Viewfinder */
+.ui-viewfinder {
+  width: 200px;
+  height: 300px;
+  position: relative;
+}
+
+.ui-corner {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border: 2px solid var(--text);
+}
+
+.top-left {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+
+.top-right {
+  top: 0;
+  right: 0;
+  border-left: none;
+  border-bottom: none;
+}
+
+.bottom-left {
+  bottom: 0;
+  left: 0;
+  border-right: none;
+  border-top: none;
+}
+
+.bottom-right {
+  bottom: 0;
+  right: 0;
+  border-left: none;
+  border-top: none;
+}
+
+.ui-pill {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--text);
+  color: var(--bg);
+  padding: 0.5rem 1rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+.pulse {
+  animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.95);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: translate(-50%, -50%) scale(1.05);
+    opacity: 1;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(0.95);
+    opacity: 0.8;
+  }
+}
+
+/* 02 Slider */
+.ui-slider-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.ui-slider-track {
+  width: 10px;
+  height: 250px;
+  background: var(--border);
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.ui-slider-fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: var(--text);
+  height: 90%;
+}
+
+.grow-up {
+  animation: growUp 3s cubic-bezier(0.16, 1, 0.3, 1) infinite alternate;
+}
+
+@keyframes growUp {
+  0% {
+    height: 10%;
+  }
+
+  100% {
+    height: 90%;
+  }
+}
+
+.ui-slider-value {
+  font-family: monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+}
+
+/* 03 Scanner */
+.ui-scanner {
+  width: 250px;
+  height: 300px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+  background: rgba(255, 255, 255, 0.01);
+  overflow: hidden;
+}
+
+.ui-doc-line {
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+}
+
+.w-long {
+  width: 100%;
+}
+
+.w-med {
+  width: 70%;
+}
+
+.w-short {
+  width: 40%;
+}
+
+.ui-laser {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--text);
+  box-shadow: 0 0 10px var(--text);
+}
+
+.scan-down {
+  animation: scanDown 2.5s infinite linear;
+}
+
+@keyframes scanDown {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+/* 04 Bottle */
+.ui-bottle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ui-bottle-neck {
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--border);
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+}
+
+.ui-bottle-body {
+  width: 120px;
+  height: 180px;
+  border: 2px solid var(--border);
+  border-radius: 20px 20px 10px 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.ui-liquid {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: var(--border);
+}
+
+.fill-up {
+  animation: fillUp 4s cubic-bezier(0.16, 1, 0.3, 1) infinite alternate;
+}
+
+@keyframes fillUp {
+  0% {
+    height: 10%;
+  }
+
+  100% {
+    height: 60%;
+  }
+}
+
+/* 05 Toggles */
+.ui-toggle-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1rem;
+}
+
+.ui-toggle-label {
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+}
+
+.ui-toggle {
+  width: 60px;
+  height: 30px;
+  border-radius: 30px;
+  background: var(--border);
+  position: relative;
+  transition: background 0.3s;
+}
+
+.ui-toggle.active {
+  background: var(--text);
+}
+
+.ui-toggle-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 26px;
+  height: 26px;
+  background: var(--bg);
+  border-radius: 50%;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ui-toggle.active .ui-toggle-knob {
+  transform: translateX(30px);
+}
+
+/* INTERACTIVE SLIDESHOW (Settings) */
+.interactive-slideshow {
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  height: 300px;
+  /* Fixed height to keep layout stable */
+}
+
+.slideshow-track {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.slide-title {
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* Theme Buttons */
+.theme-buttons {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.theme-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 4px solid transparent;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.theme-btn.active {
+  transform: scale(1.1);
+  border-color: var(--accent);
+}
+
+.theme-black {
+  background: #0a0a0a;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.theme-white {
+  background: #ffffff;
+}
+
+.theme-blue {
+  background: #0f172a;
+}
+
+/* Language Buttons */
+.lang-buttons {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.lang-btn {
+  padding: 1rem 2rem;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.lang-btn.active,
+.lang-btn:hover {
+  background: var(--text);
+  color: var(--bg);
+}
+
+/* Screen Reader Controls */
+.reader-control {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 300px;
+  background: var(--surface);
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+
+.reader-label,
+.reader-value {
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: monospace;
+}
+
+.custom-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  outline: none;
+}
+
+.custom-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--text);
+  cursor: pointer;
+}
+
+.test-audio-btn {
+  padding: 0.75rem 2rem;
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.test-audio-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Slideshow Navigation */
+.slide-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  /* hardcode white to remain visible across themes */
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.slide-nav:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.slide-prev {
+  left: 1rem;
+}
+
+.slide-next {
+  right: 1rem;
+}
+
+/* Right Aligned Vertical Dots */
+.slide-dots {
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 10;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background: var(--text);
+  transform: scale(1.5);
+}
+
+/* Specs Grid */
+.specs {
+  padding: 15vh 0;
+}
+
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4vw;
+}
+
+.spec-title {
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  margin-bottom: 2rem;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1rem;
+}
+
+.spec-list {
+  list-style: none;
+}
+
+.spec-list li {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 300;
+}
+
+.spec-desc {
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: var(--text-muted);
+}
+
+/* Footer / CTA */
+.footer {
+  padding: 20vh 0 5vh;
+}
+
+.btn-clean {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  border: 1px solid var(--text);
+  padding: 1.5rem 3rem;
+  border-radius: 100px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.btn-clean:hover {
+  background-color: var(--text);
+  color: var(--bg);
+}
+
+.footer-bottom {
+  margin-top: 15vh;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Animations */
+.fade-up {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fade-up.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-left {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fade-left.in-view {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fade-right {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fade-right.in-view {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .feature-layout {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+
+  .feature-num {
+    grid-column: 1 / -1;
+    font-size: 15rem;
+    margin-bottom: -4rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .feature-layout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .feature-num {
+    font-size: 10rem;
+    margin-bottom: -3rem;
+  }
+
+  .feature-visual {
+    justify-content: flex-start;
+  }
+
+  .specs-grid {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+}
+/* Urdu Typography Mode Enhancements */
+body.urdu-mode {
+  font-family: 'Noto Nastaliq Urdu', 'Noto Sans Arabic', serif;
+  line-height: 2;
+  letter-spacing: normal;
+}
+
+body.urdu-mode .hero-title {
+  font-size: clamp(2.5rem, 6vw, 6rem) !important;
+  line-height: 1.4 !important;
+  letter-spacing: normal !important;
+  font-weight: 700;
+}
+
+body.urdu-mode .hero-desc {
+  font-size: clamp(1.1rem, 1.5vw, 1.6rem) !important;
+  line-height: 2.2 !important;
+  font-weight: 400;
+}
+
+body.urdu-mode .feature-headline {
+  font-size: clamp(2rem, 4.5vw, 4.5rem) !important;
+  line-height: 1.6 !important;
+  letter-spacing: normal !important;
+  font-weight: 700;
+}
+
+body.urdu-mode .feature-body {
+  font-size: 1.2rem !important;
+  line-height: 2.2 !important;
+  font-weight: 400;
+}
+
+body.urdu-mode .massive-text {
+  font-size: clamp(2.5rem, 6vw, 6rem) !important;
+  line-height: 1.5 !important;
+  letter-spacing: normal !important;
+  font-weight: 700;
+}
+
+body.urdu-mode .btn-primary {
+  font-size: 1.1rem !important;
+  letter-spacing: normal !important;
+  padding: 1.5rem 2.5rem;
+}
+
+body.urdu-mode .slide-title {
+  font-size: 1.2rem !important;
+  letter-spacing: normal !important;
+  line-height: 1.8 !important;
+}
+
+body.urdu-mode .lang-btn,
+body.urdu-mode .test-audio-btn {
+  font-size: 1.1rem !important;
+  letter-spacing: normal !important;
+  padding: 1rem 2rem;
+  font-family: 'Noto Nastaliq Urdu', 'Noto Sans Arabic', serif;
+}
+
+body.urdu-mode .reader-label,
+body.urdu-mode .reader-value {
+  font-size: 0.95rem !important;
+  letter-spacing: normal !important;
+}
+
+body.urdu-mode .spec-title {
+  font-size: 0.95rem !important;
+  letter-spacing: normal !important;
+}
+
+body.urdu-mode .spec-list li,
+body.urdu-mode .spec-desc {
+  font-size: 1.3rem !important;
+  line-height: 2 !important;
+}
+
+body.urdu-mode .ui-pill {
+  font-size: 0.8rem !important;
+  letter-spacing: normal !important;
+  padding: 0.6rem 1.2rem;
+}
+
+body.urdu-mode .ui-slider-value {
+  font-size: 0.9rem !important;
+  letter-spacing: normal !important;
+}
+
+body.urdu-mode .logo {
+  font-size: 1.3rem !important;
+  letter-spacing: normal !important;
+}
+
+body.urdu-mode .nav-link span {
+  font-size: 0.9rem !important;
+  letter-spacing: normal !important;
+}
+
+body.urdu-mode .btn-clean {
+  font-size: 1rem !important;
+  letter-spacing: normal !important;
+}
+
+body.urdu-mode .footer-bottom {
+  font-size: 0.95rem !important;
+}
+
+/* Fix language buttons - prevent disappearing */
+.lang-buttons {
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.lang-btn {
+  white-space: nowrap;
+  min-width: 120px;
+}
+
+/* Ensure slides are always visible in Urdu mode */
+body.urdu-mode .slide {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+body.urdu-mode .slide-title {
+  display: block !important;
+  opacity: 1 !important;
+  color: var(--text-muted) !important;
+}
+
+body.urdu-mode .theme-buttons,
+body.urdu-mode .reader-control,
+body.urdu-mode .lang-buttons {
+  display: flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+body.urdu-mode .lang-btn {
+  display: inline-flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Force Urdu font on all slide content */
+body.urdu-mode .slide * {
+  font-family: 'Noto Nastaliq Urdu', 'Noto Sans Arabic', serif !important;
+}
+
+/* Keep monospace for speed display */
+body.urdu-mode .reader-value {
+  font-family: 'Courier New', monospace !important;
+}
+
+/* Ensure proper rendering with word-break for Urdu */
+body.urdu-mode .slide-title,
+body.urdu-mode .test-audio-btn,
+body.urdu-mode .reader-label {
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+/* Clean Minimalist Slide Indicators */
+.slide-indicators {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 2rem;
+  z-index: 10;
+}
+
+.indicator-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  opacity: 0.5;
+}
+
+.indicator-btn:hover {
+  opacity: 0.8;
+}
+
+.indicator-btn.active {
+  opacity: 1;
+}
+
+.indicator-line {
+  width: 40px;
+  height: 2px;
+  background: var(--text);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: center;
+}
+
+.indicator-btn:hover .indicator-line {
+  width: 50px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.indicator-btn.active .indicator-line {
+  width: 60px;
+  height: 3px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+.indicator-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--text);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Urdu mode adjustments for indicators */
+body.urdu-mode .indicator-label {
+  font-family: 'Noto Nastaliq Urdu', 'Noto Sans Arabic', serif;
+  font-size: 0.85rem;
+  letter-spacing: normal;
+}
+
+/* Remove old navigation styles */
+.slide-nav,
+.slide-dots {
+  display: none;
+}
+
+/* Update Urdu fonts to maintain accessibility */
+body.urdu-mode {
+  font-family: 'Noto Nastaliq Urdu', 'Noto Sans Arabic', serif;
+}
+
+/* Ensure body elements use accessible fonts in English */
+body:not(.urdu-mode) {
+  font-family: 'Atkinson Hyperlegible', 'Lexend', sans-serif;
+}
+
+body:not(.urdu-mode) .hero-title,
+body:not(.urdu-mode) .feature-headline,
+body:not(.urdu-mode) .massive-text {
+  font-family: 'Lexend', sans-serif;
+}
+
+body:not(.urdu-mode) .hero-desc,
+body:not(.urdu-mode) .feature-body,
+body:not(.urdu-mode) .spec-desc {
+  font-family: 'Atkinson Hyperlegible', sans-serif;
+}
+
+/* Fix slide title spacing and Urdu button sizes */
+.slide-title {
+  margin-bottom: 1.5rem !important;
+  padding-bottom: 0.5rem !important;
+}
+
+/* Keep Urdu buttons same size as English */
+body.urdu-mode .lang-btn {
+  font-size: 1rem !important;
+  padding: 1rem 2rem !important;
+  font-family: 'Noto Nastaliq Urdu', 'Noto Sans Arabic', serif;
+}
+
+body.urdu-mode .test-audio-btn {
+  font-size: 0.9rem !important;
+  padding: 0.75rem 2rem !important;
+}
+
+/* Adjust slide gap for better spacing */
+.slide {
+  gap: 2.5rem !important;
+}
+
+.slide-language {
+  gap: 2rem !important;
+}
+
+.slide-reader {
+  gap: 2rem !important;
+}
+
+/* Clean Styled Navigation Buttons */
+.slide-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 10;
+}
+
+.slide-nav:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--text);
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+}
+
+.slide-nav svg {
+  width: 20px;
+  height: 20px;
+}
+
+.slide-prev {
+  left: 1rem;
+}
+
+.slide-next {
+  right: 1rem;
+}
+
+/* RTL adjustments for navigation */
+body[dir="rtl"] .slide-prev {
+  left: auto;
+  right: 1rem;
+}
+
+body[dir="rtl"] .slide-next {
+  right: auto;
+  left: 1rem;
+}
+
+body[dir="rtl"] .slide-prev svg {
+  transform: scaleX(-1);
+}
+
+body[dir="rtl"] .slide-next svg {
+  transform: scaleX(-1);
+}
+
+/* Feature Layout Reverse (Visual on Left) */
+.feature-layout-reverse {
+  direction: ltr;
+}
+
+.feature-layout-reverse .feature-visual {
+  order: -1;
+  justify-content: flex-start;
+}
+
+.feature-layout-reverse .feature-content {
+  order: 1;
+  text-align: left;
+}
+
+/* RTL adjustments for reversed layout */
+body[dir="rtl"] .feature-layout-reverse {
+  direction: rtl;
+}
+
+body[dir="rtl"] .feature-layout-reverse .feature-visual {
+  justify-content: flex-end;
+}
+
+body[dir="rtl"] .feature-layout-reverse .feature-content {
+  text-align: right;
+}
+
+/* Remove old indicator styles */
+.slide-indicators,
+.indicator-btn,
+.indicator-line,
+.indicator-label {
+  display: none !important;
+}

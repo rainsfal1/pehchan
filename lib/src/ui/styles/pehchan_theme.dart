@@ -13,7 +13,7 @@ enum DeviceSize {
   desktop,
 }
 
-abstract class PillKaBooTheme {
+abstract class PehchanTheme {
   static DeviceSize deviceSize = DeviceSize.mobile;
 
   static Future initialize() async =>
@@ -31,7 +31,7 @@ abstract class PillKaBooTheme {
       ? _prefs?.remove(kThemeModeKey)
       : _prefs?.setBool(kThemeModeKey, mode == ThemeMode.dark);
 
-  static PillKaBooTheme of(BuildContext context) {
+  static PehchanTheme of(BuildContext context) {
     deviceSize = getDeviceSize(context);
     return Theme.of(context).brightness == Brightness.dark
         ? DarkModeTheme()
@@ -140,7 +140,7 @@ DeviceSize getDeviceSize(BuildContext context) {
   }
 }
 
-class LightModeTheme extends PillKaBooTheme {
+class LightModeTheme extends PehchanTheme {
   @Deprecated('Use primary instead')
   Color get primaryColor => primary;
   @Deprecated('Use secondary instead')
@@ -202,7 +202,7 @@ abstract class Typography {
 class MobileTypography extends Typography {
   MobileTypography(this.theme);
 
-  final PillKaBooTheme theme;
+  final PehchanTheme theme;
 
   String get displayLargeFamily => 'Pretendard';
   TextStyle get displayLarge => TextStyle(
@@ -314,7 +314,7 @@ class MobileTypography extends Typography {
 class TabletTypography extends Typography {
   TabletTypography(this.theme);
 
-  final PillKaBooTheme theme;
+  final PehchanTheme theme;
 
   String get displayLargeFamily => 'Pretendard';
   TextStyle get displayLarge => TextStyle(
@@ -426,7 +426,7 @@ class TabletTypography extends Typography {
 class DesktopTypography extends Typography {
   DesktopTypography(this.theme);
 
-  final PillKaBooTheme theme;
+  final PehchanTheme theme;
 
   String get displayLargeFamily => 'ButtonFont';
   TextStyle get displayLarge => TextStyle(
@@ -535,7 +535,7 @@ class DesktopTypography extends Typography {
       );
 }
 
-class DarkModeTheme extends PillKaBooTheme {
+class DarkModeTheme extends PehchanTheme {
   @Deprecated('Use primary instead')
   Color get primaryColor => primary;
   @Deprecated('Use secondary instead')

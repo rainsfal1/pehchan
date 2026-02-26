@@ -1,7 +1,7 @@
-import 'package:pillkaboo/src/app/tts/tts_service.dart';
+import 'package:pehchan/src/app/tts/tts_service.dart';
 
-import '../../../styles/pillkaboo_theme.dart';
-import '../../../../core/pillkaboo_util.dart';
+import '../../../styles/pehchan_theme.dart';
+import '../../../../core/pehchan_util.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,13 +23,24 @@ class _AccessibilityChoicePageWidgetState extends State<AccessibilityChoicePageW
   late AccessibilityChoicePageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final text = "Tap the top half to use your screen reader. Tap the bottom half to use the app audio guidance.";
+  bool _didSpeakPrompt = false;
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => AccessibilityChoicePageModel());
-    TtsService().speak(text);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_didSpeakPrompt) return;
+    final loc = PKBLocalizations.of(context);
+    final prompt = loc.getText('tts_accessibility_choice_prompt').isNotEmpty
+        ? loc.getText('tts_accessibility_choice_prompt')
+        : 'Tap the top half to use your screen reader. Tap the bottom half to use the app audio guidance.';
+    TtsService().speak(prompt);
+    _didSpeakPrompt = true;
   }
 
   @override

@@ -1,5 +1,5 @@
-import '../../../../../core/pillkaboo_util.dart';
-import '../../../../styles/pillkaboo_theme.dart';
+import '../../../../../core/pehchan_util.dart';
+import '../../../../styles/pehchan_theme.dart';
 import '../../../../widgets/index.dart' as widgets;
 
 import 'package:flutter/material.dart';
@@ -72,12 +72,12 @@ class _AllergyListPageWidgetState extends State<AllergyListPageWidget> {
               excluding: true,
               child: Text(
                 loc.getText('settings_allergy').isNotEmpty ? loc.getText('settings_allergy') : 'Allergy settings',
-                style: PillKaBooTheme.of(context).headlineMedium.override(
-                  fontFamily: PillKaBooTheme.of(context).headlineMediumFamily,
+                style: PehchanTheme.of(context).headlineMedium.override(
+                  fontFamily: PehchanTheme.of(context).headlineMediumFamily,
                   color: PKBAppState().secondaryColor,
                   fontSize: appBarFontSize,
                   fontWeight: _weightForLocale(loc),
-                  useGoogleFonts: GoogleFonts.asMap().containsKey(PillKaBooTheme.of(context).headlineMediumFamily),
+                  useGoogleFonts: GoogleFonts.asMap().containsKey(PehchanTheme.of(context).headlineMediumFamily),
                 ),
               ),
             ),

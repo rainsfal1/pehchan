@@ -1,8 +1,8 @@
-import 'package:pillkaboo/src/app/tts/tts_service.dart';
+import 'package:pehchan/src/app/tts/tts_service.dart';
 
 import '../../../widgets/index.dart' as widgets;
-import '../../../styles/pillkaboo_theme.dart';
-import '../../../../core/pillkaboo_util.dart';
+import '../../../styles/pehchan_theme.dart';
+import '../../../../core/pehchan_util.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
@@ -89,12 +89,12 @@ class _HelpPageWidgetState extends State<HelpPageWidget> {
               excluding: true,
               child: Text(
                 loc.getText('help_title').isNotEmpty ? loc.getText('help_title') : 'Help',
-                style: PillKaBooTheme.of(context).headlineMedium.override(
-                  fontFamily: PillKaBooTheme.of(context).headlineMediumFamily,
+                style: PehchanTheme.of(context).headlineMedium.override(
+                  fontFamily: PehchanTheme.of(context).headlineMediumFamily,
                   color: PKBAppState().secondaryColor,
                   fontSize: appBarFontSize,
                   fontWeight: fontWeight,
-                  useGoogleFonts: GoogleFonts.asMap().containsKey(PillKaBooTheme.of(context).headlineMediumFamily),
+                  useGoogleFonts: GoogleFonts.asMap().containsKey(PehchanTheme.of(context).headlineMediumFamily),
                 ),
               ),
             ),
@@ -300,13 +300,13 @@ class _HelpPageWidgetState extends State<HelpPageWidget> {
                             label,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: PillKaBooTheme.of(context).titleMedium.override(
-                                  fontFamily: PillKaBooTheme.of(context).titleMediumFamily,
+                            style: PehchanTheme.of(context).titleMedium.override(
+                                  fontFamily: PehchanTheme.of(context).titleMediumFamily,
                                   fontSize: textFontSize,
                                   color: secondary,
                                   fontWeight: fontWeight,
                                   useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                      PillKaBooTheme.of(context).titleMediumFamily),
+                                      PehchanTheme.of(context).titleMediumFamily),
                                 ),
                           ),
                           if (expanded) ...[
@@ -396,13 +396,13 @@ class _HelpPageWidgetState extends State<HelpPageWidget> {
                             label,
                             maxLines: 2,
                             overflow: TextOverflow.visible,
-                            style: PillKaBooTheme.of(context).titleMedium.override(
-                                  fontFamily: PillKaBooTheme.of(context).titleMediumFamily,
+                            style: PehchanTheme.of(context).titleMedium.override(
+                                  fontFamily: PehchanTheme.of(context).titleMediumFamily,
                                   fontSize: textFontSize,
                                   color: secondary,
                                   fontWeight: fontWeight,
                                   useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                      PillKaBooTheme.of(context).titleMediumFamily),
+                                      PehchanTheme.of(context).titleMediumFamily),
                                 ),
                           ),
                         ],

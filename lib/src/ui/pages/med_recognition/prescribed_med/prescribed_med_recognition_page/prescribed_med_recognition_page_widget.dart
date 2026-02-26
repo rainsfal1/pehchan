@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import '../../../../../core/pillkaboo_util.dart';
+import '../../../../../core/pehchan_util.dart';
 import '../../../../widgets/index.dart' as widgets;
 import '../../../../../app/tts/tts_service.dart';
 

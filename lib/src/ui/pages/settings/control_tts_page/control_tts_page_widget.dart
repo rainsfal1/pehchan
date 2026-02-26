@@ -1,7 +1,7 @@
-import 'package:pillkaboo/src/app/tts/tts_service.dart';
+import 'package:pehchan/src/app/tts/tts_service.dart';
 
-import '../../../styles/pillkaboo_theme.dart';
-import '../../../../core/pillkaboo_util.dart';
+import '../../../styles/pehchan_theme.dart';
+import '../../../../core/pehchan_util.dart';
 import '../../../widgets/index.dart' as widgets;
 import '../../../../app/global_audio_player.dart';
 
@@ -69,7 +69,11 @@ class _ControlTTSPageWidgetState extends State<ControlTTSPageWidget> {
         sliderValue = value;
         PKBAppState().ttsSpeed = value;
         TtsService().stop();
-        TtsService().speak("Speed set to ${value.toStringAsFixed(1)}");
+        final template = loc.getText('tts_speed_set').isNotEmpty
+            ? loc.getText('tts_speed_set')
+            : 'Speed set to {value}';
+        final message = template.replaceAll('{value}', value.toStringAsFixed(1));
+        TtsService().speak(message);
         TtsService().setTtsSpeed(value);
       });
     }
@@ -93,12 +97,12 @@ class _ControlTTSPageWidgetState extends State<ControlTTSPageWidget> {
                 loc.getText('audio_settings').isNotEmpty
                     ? loc.getText('audio_settings')
                     : 'Audio settings',
-                style: PillKaBooTheme.of(context).headlineMedium.override(
-                  fontFamily: PillKaBooTheme.of(context).headlineMediumFamily,
+                style: PehchanTheme.of(context).headlineMedium.override(
+                  fontFamily: PehchanTheme.of(context).headlineMediumFamily,
                   color: PKBAppState().secondaryColor,
                   fontSize: appBarFontSize,
                   fontWeight: weight,
-                  useGoogleFonts: GoogleFonts.asMap().containsKey(PillKaBooTheme.of(context).headlineMediumFamily),
+                  useGoogleFonts: GoogleFonts.asMap().containsKey(PehchanTheme.of(context).headlineMediumFamily),
                 ),
               ),
             ),
@@ -127,7 +131,10 @@ class _ControlTTSPageWidgetState extends State<ControlTTSPageWidget> {
                           PKBAppState().useScreenReader = !PKBAppState().useScreenReader;
                           if (!PKBAppState().useScreenReader) {
                             TtsService().stop();
-                            TtsService().speak("Using app audio.");
+                            final message = loc.getText('tts_using_app_audio').isNotEmpty
+                                ? loc.getText('tts_using_app_audio')
+                                : 'Using app audio.';
+                            TtsService().speak(message);
                           } else {
                             TtsService().stop();
                           }

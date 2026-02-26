@@ -525,6 +525,70 @@ final kTranslationsMap = <String, Map<String, String>>{
     'en': 'no schedule set',
     'ur': 'کوئی شیڈول سیٹ نہیں',
   },
+  'tts_datamatrix_detected': {
+    'en': 'DataMatrix detected',
+    'ur': 'ڈیٹامیٹرکس مل گیا',
+  },
+  'tts_expiry_from_barcode': {
+    'en': 'Expiry date detected from barcode',
+    'ur': 'بارکوڈ سے میعاد ختم ہونے کی تاریخ مل گئی',
+  },
+  'tts_time_to_take_dose': {
+    'en': 'Time to take {medicineName}. Your {slot} dose is ready.',
+    'ur': 'اب {medicineName} لینے کا وقت ہے۔ آپ کی {slot} کی خوراک تیار ہے۔',
+  },
+  'tts_dose_marked_taken': {
+    'en': '{medicineName} dose marked as taken',
+    'ur': '{medicineName} کی خوراک لے لی گئی کے طور پر نشان زد ہوگئی۔',
+  },
+  'tts_dose_skipped': {
+    'en': 'Dose skipped',
+    'ur': 'خوراک چھوڑ دی گئی',
+  },
+  'tts_select_medicine_prompt': {
+    'en': 'Which medicine is this prescription for? Tap a medicine to attach instructions.',
+    'ur': 'یہ نسخہ کس دوا کے لیے ہے؟ ہدایات منسلک کرنے کے لیے دوا منتخب کریں۔',
+  },
+  'tts_attaching_instructions': {
+    'en': 'Attaching instructions to {medicineName}',
+    'ur': '{medicineName} کے ساتھ ہدایات منسلک کی جا رہی ہیں',
+  },
+  'tts_speed_set': {
+    'en': 'Speed set to {value}',
+    'ur': 'رفتار {value} پر سیٹ ہوگئی',
+  },
+  'tts_using_app_audio': {
+    'en': 'Using app audio.',
+    'ur': 'ایپ کی آڈیو استعمال ہو رہی ہے۔',
+  },
+  'tts_accessibility_choice_prompt': {
+    'en': 'Tap the top half to use your screen reader. Tap the bottom half to use the app audio guidance.',
+    'ur': 'اسکرین ریڈر استعمال کرنے کے لیے اوپر والے حصے پر ٹیپ کریں۔ ایپ آڈیو کے لیے نیچے والے حصے پر ٹیپ کریں۔',
+  },
+  'tts_dose_due_now_for': {
+    'en': 'Dose due now for {medicineName}',
+    'ur': 'اب {medicineName} کی خوراک کا وقت ہے',
+  },
+  'tts_next_dose_in_for': {
+    'en': 'Next dose in {time} for {medicineName}',
+    'ur': 'اگلی خوراک {time} بعد {medicineName} کے لیے',
+  },
+  'tts_take_instructions': {
+    'en': 'Take {instructions}',
+    'ur': '{instructions} لیں',
+  },
+  'tts_prescription_take_slot': {
+    'en': 'Take {slot}',
+    'ur': '{slot} میں لیں',
+  },
+  'tts_prescription_for_duration': {
+    'en': 'for {duration}',
+    'ur': '{duration} تک',
+  },
+  'tts_prescription_date': {
+    'en': 'Prescribed on {date}',
+    'ur': '{date} کو تجویز کیا گیا',
+  },
   'confirm_medicine': {
     'en': 'Confirm Medicine',
     'ur': 'دوا کی تصدیق کریں',

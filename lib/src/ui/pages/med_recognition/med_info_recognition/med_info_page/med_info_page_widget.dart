@@ -1,8 +1,8 @@
-import 'package:pillkaboo/src/app/tts/tts_service.dart';
+import 'package:pehchan/src/app/tts/tts_service.dart';
 import '../../../../../app/global_audio_player.dart';
-import '../../../../../core/pillkaboo_util.dart';
-import '../../../../styles/pillkaboo_icon_button.dart';
-import '../../../../styles/pillkaboo_theme.dart';
+import '../../../../../core/pehchan_util.dart';
+import '../../../../styles/pehchan_icon_button.dart';
+import '../../../../styles/pehchan_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -113,12 +113,12 @@ class _MedInfoPageWidgetState extends State<MedInfoPageWidget> {
                 excluding: true,
                 child: Text(
                   'Medicine information',
-                  style: PillKaBooTheme.of(context).headlineMedium.override(
-                    fontFamily: PillKaBooTheme.of(context).headlineMediumFamily,
+                  style: PehchanTheme.of(context).headlineMedium.override(
+                    fontFamily: PehchanTheme.of(context).headlineMediumFamily,
                     color: PKBAppState().secondaryColor,
                     fontSize: appBarFontSize,
                     fontWeight: FontWeight.bold,
-                    useGoogleFonts: GoogleFonts.asMap().containsKey(PillKaBooTheme.of(context).headlineMediumFamily),
+                    useGoogleFonts: GoogleFonts.asMap().containsKey(PehchanTheme.of(context).headlineMediumFamily),
                   ),
                 ),
               ),
@@ -128,7 +128,7 @@ class _MedInfoPageWidgetState extends State<MedInfoPageWidget> {
                             label: 'Go to home. Double tap to activate.',
                 child: ExcludeSemantics(
                   excluding: true,
-                  child: PillKaBooIconButton(
+                  child: PehchanIconButton(
                   borderColor: Colors.transparent,
                   borderRadius: 30.0,
                   borderWidth: 1.0,
@@ -184,13 +184,13 @@ class _MedInfoPageWidgetState extends State<MedInfoPageWidget> {
                                 ? 'Unknown medicine'
                                 : PKBAppState().infoMedName,
                             textAlign: TextAlign.center,
-                            style: PillKaBooTheme.of(context).headlineMedium.override(
-                              fontFamily: PillKaBooTheme.of(context).headlineMediumFamily,
+                            style: PehchanTheme.of(context).headlineMedium.override(
+                              fontFamily: PehchanTheme.of(context).headlineMediumFamily,
                               color: PKBAppState().secondaryColor,
                               fontSize: appBarFontSize,
                               fontWeight: FontWeight.w800,
                               useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                PillKaBooTheme.of(context).headlineMediumFamily,
+                                PehchanTheme.of(context).headlineMediumFamily,
                               ),
                             ),
                           ),
@@ -376,14 +376,14 @@ class _MedInfoPageWidgetState extends State<MedInfoPageWidget> {
                     Expanded(
                       child: Text(
                         title,
-                        style: PillKaBooTheme.of(context).titleMedium.override(
+                        style: PehchanTheme.of(context).titleMedium.override(
                               fontFamily:
-                                  PillKaBooTheme.of(context).titleMediumFamily,
+                                  PehchanTheme.of(context).titleMediumFamily,
                               fontSize: textFontSize,
                               color: secondary,
                               fontWeight: FontWeight.bold,
                               useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  PillKaBooTheme.of(context).titleMediumFamily),
+                                  PehchanTheme.of(context).titleMediumFamily),
                             ),
                       ),
                     ),

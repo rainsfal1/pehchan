@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class PillKaBooIconButton extends StatefulWidget {
-  const PillKaBooIconButton({
+class PehchanIconButton extends StatefulWidget {
+  const PehchanIconButton({
     super.key,
     required this.icon,
     this.borderColor,
@@ -32,10 +32,10 @@ class PillKaBooIconButton extends StatefulWidget {
   final Function()? onPressed;
 
   @override
-  State<PillKaBooIconButton> createState() => _PillKaBooIconButtonState();
+  State<PehchanIconButton> createState() => _PehchanIconButtonState();
 }
 
-class _PillKaBooIconButtonState extends State<PillKaBooIconButton> {
+class _PehchanIconButtonState extends State<PehchanIconButton> {
   bool loading = false;
   late double? iconSize;
   late Color? iconColor;
@@ -48,7 +48,7 @@ class _PillKaBooIconButtonState extends State<PillKaBooIconButton> {
   }
 
   @override
-  void didUpdateWidget(PillKaBooIconButton oldWidget) {
+  void didUpdateWidget(PehchanIconButton oldWidget) {
     super.didUpdateWidget(oldWidget);
     _updateIcon();
   }

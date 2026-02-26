@@ -4,9 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:vibration/vibration.dart';
 
-import '../../../../core/pillkaboo_util.dart';
+import '../../../../core/pehchan_util.dart';
 import '../../../../app/tts/tts_service.dart';
-import '../../../styles/pillkaboo_theme.dart';
+import '../../../styles/pehchan_theme.dart';
 import '../../../widgets/index.dart' as widgets;
 import 'font_size_page_model.dart';
 export 'font_size_page_model.dart';
@@ -88,14 +88,14 @@ class _FontSizePageWidgetState extends State<FontSizePageWidget> {
                 loc.getText('settings_font_size').isNotEmpty
                     ? loc.getText('settings_font_size')
                     : 'Text size',
-                style: PillKaBooTheme.of(context).headlineMedium.override(
+                style: PehchanTheme.of(context).headlineMedium.override(
                       fontFamily:
-                          PillKaBooTheme.of(context).headlineMediumFamily,
+                          PehchanTheme.of(context).headlineMediumFamily,
                       color: PKBAppState().secondaryColor,
                       fontSize: appBarFontSize,
                       fontWeight: _weightForLocale(loc),
                       useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          PillKaBooTheme.of(context).headlineMediumFamily),
+                          PehchanTheme.of(context).headlineMediumFamily),
                     ),
               ),
             ),

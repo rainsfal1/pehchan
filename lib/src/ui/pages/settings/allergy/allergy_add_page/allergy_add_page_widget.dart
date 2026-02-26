@@ -1,8 +1,8 @@
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
-import 'package:pillkaboo/src/app/tts/tts_service.dart';
+import 'package:pehchan/src/app/tts/tts_service.dart';
 
-import '../../../../styles/pillkaboo_theme.dart';
-import '../../../../../core/pillkaboo_util.dart';
+import '../../../../styles/pehchan_theme.dart';
+import '../../../../../core/pehchan_util.dart';
 import '../../../../widgets/index.dart' as widgets;
 
 import 'package:flutter/material.dart';
@@ -85,12 +85,12 @@ class _AllergyAddPageWidgetState extends State<AllergyAddPageWidget> {
                 loc.getText('allergy_add_title').isNotEmpty
                     ? loc.getText('allergy_add_title')
                     : 'Add allergy',
-                style: PillKaBooTheme.of(context).headlineMedium.override(
-                  fontFamily: PillKaBooTheme.of(context).headlineMediumFamily,
+                style: PehchanTheme.of(context).headlineMedium.override(
+                  fontFamily: PehchanTheme.of(context).headlineMediumFamily,
                   color: PKBAppState().secondaryColor,
                   fontSize: appBarFontSize,
                   fontWeight: _weightForLocale(loc),
-                  useGoogleFonts: GoogleFonts.asMap().containsKey(PillKaBooTheme.of(context).headlineMediumFamily),
+                  useGoogleFonts: GoogleFonts.asMap().containsKey(PehchanTheme.of(context).headlineMediumFamily),
                 ),
               ),
             ),

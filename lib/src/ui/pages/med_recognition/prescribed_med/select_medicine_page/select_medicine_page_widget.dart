@@ -3,9 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../../core/pillkaboo_util.dart';
+import '../../../../../core/pehchan_util.dart';
 import '../../../../../app/tts/tts_service.dart';
-import '../../../../styles/pillkaboo_theme.dart';
+import '../../../../styles/pehchan_theme.dart';
 import '../../../../widgets/index.dart' as widgets;
 
 import 'select_medicine_page_model.dart';
@@ -30,8 +30,12 @@ class _SelectMedicinePageWidgetState extends State<SelectMedicinePageWidget> {
     // Read initial instructions
     Future.delayed(Duration.zero, () {
       if (mounted && !PKBAppState().useScreenReader && !PKBAppState().silentMode) {
+        final loc = PKBLocalizations.of(context);
         TtsService().stop();
-        TtsService().speak('Which medicine is this prescription for? Tap a medicine to attach instructions.');
+        final message = loc.getText('tts_select_medicine_prompt').isNotEmpty
+            ? loc.getText('tts_select_medicine_prompt')
+            : 'Which medicine is this prescription for? Tap a medicine to attach instructions.';
+        TtsService().speak(message);
       }
     });
   }
@@ -101,13 +105,13 @@ class _SelectMedicinePageWidgetState extends State<SelectMedicinePageWidget> {
               excluding: true,
               child: Text(
                 loc.getText('select_medicine'),
-                style: PillKaBooTheme.of(context).headlineMedium.override(
-                  fontFamily: PillKaBooTheme.of(context).headlineMediumFamily,
+                style: PehchanTheme.of(context).headlineMedium.override(
+                  fontFamily: PehchanTheme.of(context).headlineMediumFamily,
                   color: PKBAppState().secondaryColor,
                   fontSize: appBarFontSize,
                   fontWeight: FontWeight.bold,
                   useGoogleFonts: GoogleFonts.asMap().containsKey(
-                    PillKaBooTheme.of(context).headlineMediumFamily,
+                    PehchanTheme.of(context).headlineMediumFamily,
                   ),
                 ),
               ),
@@ -190,8 +194,13 @@ class _SelectMedicinePageWidgetState extends State<SelectMedicinePageWidget> {
                             child: InkWell(
                               onTap: () {
                                 if (!PKBAppState().useScreenReader && !PKBAppState().silentMode) {
+                                  final message = loc.getText('tts_attaching_instructions').isNotEmpty
+                                      ? loc.getText('tts_attaching_instructions')
+                                      : 'Attaching instructions to {medicineName}';
                                   TtsService().stop();
-                                  TtsService().speak('Attaching instructions to $medicineName');
+                                  TtsService().speak(
+                                    message.replaceAll('{medicineName}', medicineName),
+                                  );
                                 }
                                 _linkInstructions(medicine);
                               },

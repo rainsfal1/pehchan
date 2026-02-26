@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/pillkaboo_util.dart';
+import '../../../../../core/pehchan_util.dart';
 
-class ManualPrescriptionPageModel extends PillKaBooModel {
+class ManualPrescriptionPageModel extends PehchanModel {
   final unfocusNode = FocusNode();
 
   @override

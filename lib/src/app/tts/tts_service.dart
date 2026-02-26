@@ -1,7 +1,7 @@
 import 'package:flutter_tts/flutter_tts.dart';
 import 'dart:io' show Platform;
 
-import 'package:pillkaboo/src/core/pillkaboo_util.dart';
+import 'package:pehchan/src/core/pehchan_util.dart';
 
 class TtsService {
   final FlutterTts _flutterTts = FlutterTts();
@@ -23,8 +23,29 @@ class TtsService {
     _ttsSpeed = speed;
   }
 
+  /// Get the TTS language code based on the current app locale
+  String _getTtsLanguage() {
+    try {
+      final storedLocale = PKBLocalizations.getStoredLocale();
+      final languageCode = storedLocale?.languageCode ?? 'en';
+
+      // Map app language codes to TTS language codes
+      switch (languageCode) {
+        case 'ur':
+          // Use Pakistani Urdu for proper pronunciation
+          return 'ur-PK';
+        case 'en':
+        default:
+          return 'en-US';
+      }
+    } catch (e) {
+      // If preferences not initialized yet, default to English
+      return 'en-US';
+    }
+  }
+
   Future<void> speak(String text) async {
-    await _flutterTts.setLanguage("en-US");
+    await _flutterTts.setLanguage(_getTtsLanguage());
     await _flutterTts.setPitch(1.0);
     await _flutterTts.setSpeechRate(_ttsSpeed);
     if (PKBAppState().silentMode == false) {

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
-Widget wrapWithModel<T extends PillKaBooModel>({
+Widget wrapWithModel<T extends PehchanModel>({
   required T model,
   required Widget child,
   required VoidCallback updateCallback,
@@ -21,7 +21,7 @@ Widget wrapWithModel<T extends PillKaBooModel>({
   );
 }
 
-T createModel<T extends PillKaBooModel>(
+T createModel<T extends PehchanModel>(
   BuildContext context,
   T Function() defaultBuilder,
 ) {
@@ -30,7 +30,7 @@ T createModel<T extends PillKaBooModel>(
   return model;
 }
 
-abstract class PillKaBooModel<W extends Widget> {
+abstract class PehchanModel<W extends Widget> {
   bool _isInitialized = false;
   void initState(BuildContext context);
   void _init(BuildContext context) {
@@ -57,7 +57,7 @@ abstract class PillKaBooModel<W extends Widget> {
   bool updateOnChange = false;
   VoidCallback _updateCallback = () {};
   void onUpdate() => updateOnChange ? _updateCallback() : () {};
-  PillKaBooModel setOnUpdate({
+  PehchanModel setOnUpdate({
     bool updateOnChange = false,
     required VoidCallback onUpdate,
   }) =>
@@ -70,8 +70,8 @@ abstract class PillKaBooModel<W extends Widget> {
   }
 }
 
-class PillKaBooDynamicModels<T extends PillKaBooModel> {
-  PillKaBooDynamicModels(this.defaultBuilder);
+class PehchanDynamicModels<T extends PehchanModel> {
+  PehchanDynamicModels(this.defaultBuilder);
 
   final T Function() defaultBuilder;
   final Map<String, T> _childrenModels = {};

@@ -1,4 +1,4 @@
-name: pillkaboo
+name: pehchan
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -103,7 +103,7 @@ flutter_launcher_icons:
   remove_alpha_ios: true
   web:
     generate: true
-  image_path: 'assets/images/app_launcher_icon.png'
+  image_path: 'pehchan-web/pehchan-logo.png'
 
 
 # For information on the generic Dart part of this file, see the

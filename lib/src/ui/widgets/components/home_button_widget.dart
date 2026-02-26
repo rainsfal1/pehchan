@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pillkaboo/src/app/tts/tts_service.dart';
-import '../../styles/pillkaboo_icon_button.dart';
-import '../../../core/pillkaboo_util.dart';
+import 'package:pehchan/src/app/tts/tts_service.dart';
+import '../../styles/pehchan_icon_button.dart';
+import '../../../core/pehchan_util.dart';
 import '../../../app/global_audio_player.dart';
 
 class HomeButtonWidget extends StatelessWidget {
@@ -20,7 +20,7 @@ class HomeButtonWidget extends StatelessWidget {
           excluding: true,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(0, 0, 10.0, 0),
-            child: PillKaBooIconButton(
+            child: PehchanIconButton(
               borderColor: Colors.transparent,
               borderRadius: iconSize,
               borderWidth: 1.0,

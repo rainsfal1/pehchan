@@ -1,5 +1,5 @@
-import '../../../styles/pillkaboo_theme.dart';
-import '../../../../core/pillkaboo_util.dart';
+import '../../../styles/pehchan_theme.dart';
+import '../../../../core/pehchan_util.dart';
 import '../../../widgets/index.dart' as widgets;
 import '../../../../app/global_audio_player.dart';
 
@@ -80,12 +80,12 @@ class _PickColorPageWidgetState extends State<PickColorPageWidget> {
                 loc.getText('color_settings').isNotEmpty
                     ? loc.getText('color_settings')
                     : 'Color settings',
-                style: PillKaBooTheme.of(context).headlineMedium.override(
-                  fontFamily: PillKaBooTheme.of(context).headlineMediumFamily,
+                style: PehchanTheme.of(context).headlineMedium.override(
+                  fontFamily: PehchanTheme.of(context).headlineMediumFamily,
                   color: PKBAppState().secondaryColor,
                   fontSize: appBarFontSize,
                   fontWeight: _weightForLocale(loc),
-                  useGoogleFonts: GoogleFonts.asMap().containsKey(PillKaBooTheme.of(context).headlineMediumFamily),
+                  useGoogleFonts: GoogleFonts.asMap().containsKey(PehchanTheme.of(context).headlineMediumFamily),
                 ),
               ),
             ),
@@ -103,7 +103,6 @@ class _PickColorPageWidgetState extends State<PickColorPageWidget> {
               children: [
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  height: 130.0,
                   padding: const EdgeInsets.all(3.0),
                   decoration: BoxDecoration(
                     color: PKBAppState().tertiaryColor,
@@ -120,13 +119,13 @@ class _PickColorPageWidgetState extends State<PickColorPageWidget> {
                             loc.getText('color_background').isNotEmpty
                                 ? loc.getText('color_background')
                                 : 'Background color',
-                            style: PillKaBooTheme.of(context).headlineMedium.override(
-                              fontFamily: PillKaBooTheme.of(context).headlineMediumFamily,
+                            style: PehchanTheme.of(context).headlineMedium.override(
+                              fontFamily: PehchanTheme.of(context).headlineMediumFamily,
                               color: PKBAppState().secondaryColor,
                               fontSize: 25.0,
                               fontWeight: _weightForLocale(loc),
                               useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  PillKaBooTheme.of(context).headlineMediumFamily),
+                                  PehchanTheme.of(context).headlineMediumFamily),
                             ),
                           ),
                         ),
@@ -137,7 +136,6 @@ class _PickColorPageWidgetState extends State<PickColorPageWidget> {
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  height: 250.0,
                   padding: const EdgeInsets.all(5.0),
                   decoration: BoxDecoration(
                     color: PKBAppState().tertiaryColor,
@@ -154,13 +152,13 @@ class _PickColorPageWidgetState extends State<PickColorPageWidget> {
                             loc.getText('color_contrast').isNotEmpty
                                 ? loc.getText('color_contrast')
                                 : 'Contrast color',
-                            style: PillKaBooTheme.of(context).headlineMedium.override(
-                              fontFamily: PillKaBooTheme.of(context).headlineMediumFamily,
+                            style: PehchanTheme.of(context).headlineMedium.override(
+                              fontFamily: PehchanTheme.of(context).headlineMediumFamily,
                               color: PKBAppState().secondaryColor,
                               fontSize: 25.0,
                               fontWeight: _weightForLocale(loc),
                               useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  PillKaBooTheme.of(context).headlineMediumFamily),
+                                  PehchanTheme.of(context).headlineMediumFamily),
                             ),
                           ),
                         ),
@@ -172,7 +170,6 @@ class _PickColorPageWidgetState extends State<PickColorPageWidget> {
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  height: 250.0,
                   padding: const EdgeInsets.all(5.0),
                   decoration: BoxDecoration(
                     color: PKBAppState().tertiaryColor,
@@ -189,13 +186,13 @@ class _PickColorPageWidgetState extends State<PickColorPageWidget> {
                             loc.getText('color_accent').isNotEmpty
                                 ? loc.getText('color_accent')
                                 : 'Accent color',
-                            style: PillKaBooTheme.of(context).headlineMedium.override(
-                              fontFamily: PillKaBooTheme.of(context).headlineMediumFamily,
+                            style: PehchanTheme.of(context).headlineMedium.override(
+                              fontFamily: PehchanTheme.of(context).headlineMediumFamily,
                               color: PKBAppState().secondaryColor,
                               fontSize: 25.0,
                               fontWeight: _weightForLocale(loc),
                               useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  PillKaBooTheme.of(context).headlineMediumFamily),
+                                  PehchanTheme.of(context).headlineMediumFamily),
                             ),
                           ),
                         ),

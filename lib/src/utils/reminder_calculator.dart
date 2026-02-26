@@ -206,21 +206,59 @@ class ReminderCalculator {
 
   /// Helper method to format a time until text
   /// Used for displaying "next dose in X hours" type messages
-  static String formatTimeUntil(DateTime time) {
+  static TimeUntilResult formatTimeUntil(DateTime time, {String? localeCode}) {
     final now = DateTime.now();
     final difference = time.difference(now);
+    final useUrdu = localeCode == 'ur';
 
     if (difference.inMinutes < 5 && difference.inMinutes > -5) {
-      return 'now';
+      return TimeUntilResult(text: useUrdu ? 'ابھی' : 'now', isNow: true);
     } else if (difference.inHours < 1) {
       final minutes = difference.inMinutes;
-      return '$minutes minute${minutes == 1 ? '' : 's'}';
+      final minutesText = _localizeNumber(minutes, useUrdu);
+      final unit = useUrdu ? 'منٹ' : 'minute${minutes == 1 ? '' : 's'}';
+      return TimeUntilResult(text: '$minutesText $unit', isNow: false);
     } else if (difference.inHours < 24) {
       final hours = difference.inHours;
-      return '$hours hour${hours == 1 ? '' : 's'}';
+      final hoursText = _localizeNumber(hours, useUrdu);
+      final unit = useUrdu ? (hours == 1 ? 'گھنٹہ' : 'گھنٹے') : 'hour${hours == 1 ? '' : 's'}';
+      return TimeUntilResult(text: '$hoursText $unit', isNow: false);
     } else {
       final days = difference.inDays;
-      return '$days day${days == 1 ? '' : 's'}';
+      final daysText = _localizeNumber(days, useUrdu);
+      final unit = useUrdu ? (days == 1 ? 'دن' : 'دن') : 'day${days == 1 ? '' : 's'}';
+      return TimeUntilResult(text: '$daysText $unit', isNow: false);
     }
   }
+}
+
+class TimeUntilResult {
+  final String text;
+  final bool isNow;
+
+  const TimeUntilResult({required this.text, required this.isNow});
+}
+
+String _localizeNumber(int value, bool useUrdu) {
+  if (!useUrdu) {
+    return value.toString();
+  }
+  final input = value.toString();
+  const digitMap = {
+    '0': '۰',
+    '1': '۱',
+    '2': '۲',
+    '3': '۳',
+    '4': '۴',
+    '5': '۵',
+    '6': '۶',
+    '7': '۷',
+    '8': '۸',
+    '9': '۹',
+  };
+  final buffer = StringBuffer();
+  for (final ch in input.split('')) {
+    buffer.write(digitMap[ch] ?? ch);
+  }
+  return buffer.toString();
 }

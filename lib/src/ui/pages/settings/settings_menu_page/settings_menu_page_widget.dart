@@ -1,6 +1,6 @@
 import '../../../widgets/index.dart' as widgets;
-import '../../../styles/pillkaboo_theme.dart';
-import '../../../../core/pillkaboo_util.dart';
+import '../../../styles/pehchan_theme.dart';
+import '../../../../core/pehchan_util.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vibration/vibration.dart';
-import 'package:pillkaboo/src/app/tts/tts_service.dart';
+import 'package:pehchan/src/app/tts/tts_service.dart';
 
 import 'settings_menu_page_model.dart';
 export 'settings_menu_page_model.dart';
@@ -79,12 +79,12 @@ class _SettingsMenuPageWidgetState extends State<SettingsMenuPageWidget> {
               excluding: true,
               child: Text(
                 loc.getText('menu_settings').isNotEmpty ? loc.getText('menu_settings') : 'Settings',
-                style: PillKaBooTheme.of(context).headlineMedium.override(
-                  fontFamily: PillKaBooTheme.of(context).headlineMediumFamily,
+                style: PehchanTheme.of(context).headlineMedium.override(
+                  fontFamily: PehchanTheme.of(context).headlineMediumFamily,
                   color: PKBAppState().secondaryColor,
                   fontSize: appBarFontSize,
                   fontWeight: FontWeight.bold,
-                  useGoogleFonts: GoogleFonts.asMap().containsKey(PillKaBooTheme.of(context).headlineMediumFamily),
+                  useGoogleFonts: GoogleFonts.asMap().containsKey(PehchanTheme.of(context).headlineMediumFamily),
                 ),
               ),
             ),
@@ -275,16 +275,16 @@ class _SettingsMenuPageWidgetState extends State<SettingsMenuPageWidget> {
                         label,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: PillKaBooTheme.of(context)
+                        style: PehchanTheme.of(context)
                             .titleMedium
                             .override(
-                              fontFamily: PillKaBooTheme.of(context)
+                              fontFamily: PehchanTheme.of(context)
                                   .titleMediumFamily,
                               color: PKBAppState().secondaryColor,
                               fontSize: textSize,
                               fontWeight: FontWeight.w900,
                               useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  PillKaBooTheme.of(context)
+                                  PehchanTheme.of(context)
                                       .titleMediumFamily),
                             ),
                       ),

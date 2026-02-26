@@ -3,9 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../core/pillkaboo_util.dart';
+import '../../../core/pehchan_util.dart';
 import '../../../app/tts/tts_service.dart';
-import '../../styles/pillkaboo_theme.dart';
+import '../../styles/pehchan_theme.dart';
 import '../../widgets/index.dart' as widgets;
 
 import 'dose_confirmation_page_model.dart';
@@ -41,8 +41,16 @@ class _DoseConfirmationPageWidgetState extends State<DoseConfirmationPageWidget>
     // Auto-speak the reminder message
     Future.delayed(Duration.zero, () {
       if (mounted && !PKBAppState().useScreenReader && !PKBAppState().silentMode) {
+        final loc = PKBLocalizations.of(context);
+        final slotLabel = _localizedSlot(loc, widget.slot);
         TtsService().stop();
-        TtsService().speak('Time to take ${widget.medicineName}. Your ${widget.slot} dose is ready.');
+        final template = loc.getText('tts_time_to_take_dose').isNotEmpty
+            ? loc.getText('tts_time_to_take_dose')
+            : 'Time to take {medicineName}. Your {slot} dose is ready.';
+        final message = template
+            .replaceAll('{medicineName}', widget.medicineName)
+            .replaceAll('{slot}', slotLabel);
+        TtsService().speak(message);
       }
     });
   }
@@ -65,8 +73,13 @@ class _DoseConfirmationPageWidgetState extends State<DoseConfirmationPageWidget>
 
     // Speak confirmation
     if (!PKBAppState().useScreenReader && !PKBAppState().silentMode) {
+      final loc = PKBLocalizations.of(context);
       TtsService().stop();
-      TtsService().speak('${widget.medicineName} dose marked as taken');
+      final template = loc.getText('tts_dose_marked_taken').isNotEmpty
+          ? loc.getText('tts_dose_marked_taken')
+          : '{medicineName} dose marked as taken';
+      final message = template.replaceAll('{medicineName}', widget.medicineName);
+      TtsService().speak(message);
     }
 
     // Navigate back to home
@@ -76,8 +89,12 @@ class _DoseConfirmationPageWidgetState extends State<DoseConfirmationPageWidget>
   void _skipDose() {
     // Speak skip message
     if (!PKBAppState().useScreenReader && !PKBAppState().silentMode) {
+      final loc = PKBLocalizations.of(context);
       TtsService().stop();
-      TtsService().speak('Dose skipped');
+      final message = loc.getText('tts_dose_skipped').isNotEmpty
+          ? loc.getText('tts_dose_skipped')
+          : 'Dose skipped';
+      TtsService().speak(message);
     }
 
     // Navigate back to home
@@ -120,13 +137,13 @@ class _DoseConfirmationPageWidgetState extends State<DoseConfirmationPageWidget>
               excluding: true,
               child: Text(
                 loc.getText('dose_reminder'),
-                style: PillKaBooTheme.of(context).headlineMedium.override(
-                  fontFamily: PillKaBooTheme.of(context).headlineMediumFamily,
+                style: PehchanTheme.of(context).headlineMedium.override(
+                  fontFamily: PehchanTheme.of(context).headlineMediumFamily,
                   color: PKBAppState().secondaryColor,
                   fontSize: appBarFontSize,
                   fontWeight: FontWeight.bold,
                   useGoogleFonts: GoogleFonts.asMap().containsKey(
-                    PillKaBooTheme.of(context).headlineMediumFamily,
+                    PehchanTheme.of(context).headlineMediumFamily,
                   ),
                 ),
               ),
@@ -269,5 +286,24 @@ class _DoseConfirmationPageWidgetState extends State<DoseConfirmationPageWidget>
         ),
       ),
     );
+  }
+
+  String _localizedSlot(PKBLocalizations loc, String slot) {
+    switch (slot.toLowerCase()) {
+      case 'morning':
+        return loc.getText('manual_rx_slot_morning').isNotEmpty
+            ? loc.getText('manual_rx_slot_morning')
+            : slot;
+      case 'noon':
+        return loc.getText('manual_rx_slot_noon').isNotEmpty
+            ? loc.getText('manual_rx_slot_noon')
+            : slot;
+      case 'night':
+        return loc.getText('manual_rx_slot_night').isNotEmpty
+            ? loc.getText('manual_rx_slot_night')
+            : slot;
+      default:
+        return slot;
+    }
   }
 }

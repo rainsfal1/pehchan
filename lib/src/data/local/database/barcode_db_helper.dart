@@ -27,7 +27,7 @@ class BarcodeDBHelper {
 
     return await openDatabase(
       dbPath,
-      version: 5, // Version 5: Add DataMatrix/GS1 support
+      version: 7, // Version 7: Force database reload for Surbex barcode fix
       onCreate: (Database db, int version) async {
         // New table with GS1 DataMatrix support
         await db.execute('''
@@ -110,6 +110,17 @@ class BarcodeDBHelper {
             'CREATE INDEX IF NOT EXISTS idx_batch ON barcodes_table(batch);'
           );
         }
+
+        // Migration to v6: Just reload CSV data (Surbex barcode value updated)
+        if (oldVersion < 6) {
+          // Data will be reloaded by loadCsvData() which is called after migration
+        }
+
+        // Migration to v7: Force reload to fix Surbex barcode
+        if (oldVersion < 7) {
+          print('BarcodeDB: Upgrading to v7, will reload CSV data');
+          // Data will be reloaded by loadCsvData() which is called after migration
+        }
       },
     );
   }
@@ -117,7 +128,9 @@ class BarcodeDBHelper {
   static Future<void> loadCsvData(Database db) async {
     try {
       // Clear existing data
+      print('BarcodeDB: Clearing existing data...');
       await db.delete('barcodes_table');
+      print('BarcodeDB: Data cleared');
 
       // Load Pakistani medicine data
       final String csvData = await rootBundle.loadString(
@@ -140,10 +153,19 @@ class BarcodeDBHelper {
       // CSV columns: product_name,product_id,barcode,barcode_format,gtin,batch,mfg_date,expiry_date,manufacturer,registration_number,description,mrp
       for (var row in csvTable.skip(1)) {
         if (row.length >= 3) {
+          final barcodeValue = row[2]?.toString().trim() ?? '';
+          final productName = row[0]?.toString().trim() ?? '';
+
+          // Skip empty rows (important: prevents PRIMARY KEY constraint violations)
+          if (barcodeValue.isEmpty || productName.isEmpty) {
+            print('BarcodeDB: Skipping empty row');
+            continue;
+          }
+
           batch.insert('barcodes_table', {
-            'product_name': row[0]?.toString() ?? '',
+            'product_name': productName,
             'product_id': row[1]?.toString() ?? '',
-            'barcode': row[2]?.toString() ?? '',
+            'barcode': barcodeValue,
             'barcode_format': row.length > 3 ? row[3]?.toString() : 'EAN13',
             'gtin': row.length > 4 ? row[4]?.toString() : null,
             'batch': row.length > 5 ? row[5]?.toString() : null,
@@ -154,11 +176,16 @@ class BarcodeDBHelper {
             'description': row.length > 10 ? row[10]?.toString() : null,
             'mrp': row.length > 11 ? row[11]?.toString() : null,
           });
+
+          print('BarcodeDB: Inserting $productName with barcode: "$barcodeValue"');
           rowCount++;
         }
       }
 
-      await batch.commit(noResult: true);
+      // Commit with error handling (changed from noResult: true to capture errors)
+      final results = await batch.commit();
+      print('BarcodeDB: Loaded $rowCount medicines from CSV');
+      print('BarcodeDB: Batch commit returned ${results.length} results');
     } catch (e) {
       print('Error loading barcode data: $e');
       rethrow;
@@ -171,9 +198,17 @@ class BarcodeDBHelper {
   /// 1. Try exact match on barcode column
   /// 2. If DataMatrix/GS1 format, extract GTIN and search by GTIN
   /// 3. Try GTIN column match
-  /// 4. For EAN-13, try without check digit (partial match)
+  /// 4. Try batch number match (for medicines with batch-based DataMatrix)
+  /// 5. For EAN-13, try without check digit (partial match)
   static Future<List<Map<String, dynamic>>> searchByBarcode(String inputBarcode) async {
     inputBarcode = inputBarcode.trim();
+
+    // Remove GS1 control characters that may prefix DataMatrix barcodes
+    // ASCII 29 (0x1D) = GS (Group Separator) - common in GS1 DataMatrix
+    if (inputBarcode.isNotEmpty && inputBarcode.codeUnitAt(0) == 29) {
+      inputBarcode = inputBarcode.substring(1);
+      print('BarcodeDB: Stripped GS1 control character from barcode');
+    }
 
     if (inputBarcode.isEmpty) {
       return [];
@@ -182,12 +217,34 @@ class BarcodeDBHelper {
     final Database db = await database;
     List<Map<String, dynamic>> matches = [];
 
+    // Debug: Check total records in database
+    final allRecords = await db.query('barcodes_table');
+    print('BarcodeDB: Total records in database: ${allRecords.length}');
+    if (allRecords.isNotEmpty) {
+      print('BarcodeDB: ALL barcodes in DB:');
+      for (var record in allRecords) {
+        final barcode = record['barcode'] as String;
+        print('  - "$barcode" (${record['product_name']}) [length: ${barcode.length}]');
+
+        // Show bytes for Surbex barcode to compare with input
+        if (barcode.contains('0108002660023')) {
+          print('    Surbex barcode bytes: ${barcode.codeUnits}');
+        }
+      }
+    }
+
     // Step 1: Try exact match on barcode column
+    print('BarcodeDB: Searching for exact match: "$inputBarcode"');
+    print('BarcodeDB: Input barcode length: ${inputBarcode.length}');
+    print('BarcodeDB: Input barcode bytes: ${inputBarcode.codeUnits}');
+
     matches = await db.query(
       'barcodes_table',
       where: 'barcode = ?',
       whereArgs: [inputBarcode],
     );
+
+    print('BarcodeDB: Exact match query returned ${matches.length} results');
 
     if (matches.isNotEmpty) return matches;
 
@@ -213,7 +270,16 @@ class BarcodeDBHelper {
 
     if (matches.isNotEmpty) return matches;
 
-    // Step 4: For EAN-13, try without check digit (Pakistani barcode fallback)
+    // Step 4: Try batch number match (for medicines with batch-based DataMatrix)
+    matches = await db.query(
+      'barcodes_table',
+      where: 'batch = ?',
+      whereArgs: [inputBarcode],
+    );
+
+    if (matches.isNotEmpty) return matches;
+
+    // Step 5: For EAN-13, try without check digit (Pakistani barcode fallback)
     if (inputBarcode.startsWith('8') && inputBarcode.length == 13) {
       String withoutCheckDigit = inputBarcode.substring(0, 12);
       matches = await db.query(

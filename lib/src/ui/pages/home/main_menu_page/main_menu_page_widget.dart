@@ -1,6 +1,6 @@
 import '../../../widgets/index.dart' as widgets;
-import '../../../styles/pillkaboo_theme.dart';
-import '../../../../core/pillkaboo_util.dart';
+import '../../../styles/pehchan_theme.dart';
+import '../../../../core/pehchan_util.dart';
 import 'main_menu_page_model.dart';
 export 'main_menu_page_model.dart';
 
@@ -10,7 +10,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:vibration/vibration.dart';
-import 'package:pillkaboo/src/app/tts/tts_service.dart';
+import 'package:pehchan/src/app/tts/tts_service.dart';
 import '../../../../utils/reminder_calculator.dart';
 
 class MainMenuPageWidget extends StatefulWidget {
@@ -33,18 +33,30 @@ class _MainMenuPageWidgetState extends State<MainMenuPageWidget> {
     // Auto-speak next dose reminder on app open
     Future.delayed(Duration.zero, () {
       if (mounted && !PKBAppState().useScreenReader && !PKBAppState().silentMode) {
+        final loc = PKBLocalizations.of(context);
         final nextDose = _getNextUpcomingDose();
         if (nextDose != null) {
           final medicine = nextDose['medicine'] as Map<String, dynamic>;
           final reminderTime = nextDose['time'] as DateTime;
           final medicineName = medicine['medicineName'];
-          final timeUntil = ReminderCalculator.formatTimeUntil(reminderTime);
+          final timeUntil = ReminderCalculator.formatTimeUntil(
+            reminderTime,
+            localeCode: loc.languageCode,
+          );
 
           String message;
-          if (timeUntil == 'now') {
-            message = 'Dose due now for $medicineName';
+          if (timeUntil.isNow) {
+            final template = loc.getText('tts_dose_due_now_for').isNotEmpty
+                ? loc.getText('tts_dose_due_now_for')
+                : 'Dose due now for {medicineName}';
+            message = template.replaceAll('{medicineName}', medicineName);
           } else {
-            message = 'Next dose in $timeUntil for $medicineName';
+            final template = loc.getText('tts_next_dose_in_for').isNotEmpty
+                ? loc.getText('tts_next_dose_in_for')
+                : 'Next dose in {time} for {medicineName}';
+            message = template
+                .replaceAll('{time}', timeUntil.text)
+                .replaceAll('{medicineName}', medicineName);
           }
 
           TtsService().stop();
@@ -103,9 +115,12 @@ class _MainMenuPageWidgetState extends State<MainMenuPageWidget> {
       final medicine = nextDose['medicine'] as Map<String, dynamic>;
       final reminderTime = nextDose['time'] as DateTime;
       final medicineName = medicine['medicineName'];
-      final timeUntil = ReminderCalculator.formatTimeUntil(reminderTime);
+      final timeUntil = ReminderCalculator.formatTimeUntil(
+        reminderTime,
+        localeCode: loc.languageCode,
+      );
 
-      if (timeUntil == 'now') {
+      if (timeUntil.isNow) {
         statusText = loc.getText('status_take_now').isNotEmpty
             ? loc.getText('status_take_now')
             : 'Take medicine now';
@@ -113,7 +128,7 @@ class _MainMenuPageWidgetState extends State<MainMenuPageWidget> {
         final template = loc.getText('status_next_dose').isNotEmpty
             ? loc.getText('status_next_dose')
             : 'Next dose: {time}';
-        statusText = template.replaceAll('{time}', timeUntil);
+        statusText = template.replaceAll('{time}', timeUntil.text);
       }
       statusSubtext = medicineName;
     } else if (medicinesWithInstructions == 0) {
@@ -350,16 +365,16 @@ class _MainMenuPageWidgetState extends State<MainMenuPageWidget> {
                           softWrap: isPrimary,
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.center,
-                          style: PillKaBooTheme.of(context)
+                          style: PehchanTheme.of(context)
                               .titleMedium
                               .override(
-                                fontFamily: PillKaBooTheme.of(context)
+                                fontFamily: PehchanTheme.of(context)
                                     .titleMediumFamily,
                                 color: PKBAppState().secondaryColor,
                                 fontSize: textSize,
                                 fontWeight: FontWeight.w900,
                                 useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    PillKaBooTheme.of(context)
+                                    PehchanTheme.of(context)
                                         .titleMediumFamily),
                               ),
                         ),

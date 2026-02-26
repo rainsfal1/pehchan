@@ -1,7 +1,7 @@
-import 'package:pillkaboo/src/app/tts/tts_service.dart';
+import 'package:pehchan/src/app/tts/tts_service.dart';
 
-import '../../../../styles/pillkaboo_theme.dart';
-import '../../../../../core/pillkaboo_util.dart';
+import '../../../../styles/pehchan_theme.dart';
+import '../../../../../core/pehchan_util.dart';
 import '../../../../widgets/index.dart' as widgets;
 import '../../../../../app/global_audio_player.dart';
 
@@ -44,14 +44,8 @@ class _CheckRestResultPageWidgetState extends State<PrescribedMedResultPageWidge
       imgPath = 'assets/images/warning.svg';
     }
     if (!PKBAppState().useScreenReader && !PKBAppState().silentMode) {
-      String message = 'Take ${PKBAppState().slotOfDay}';
-      if (PKBAppState().extractedDuration.isNotEmpty) {
-        message += ' for ${PKBAppState().extractedDuration}';
-      }
-      if (PKBAppState().infoPrescribedDate.isNotEmpty) {
-        message += '. Prescribed on ${PKBAppState().infoPrescribedDate}';
-      }
-      TtsService().speak(message);
+      final loc = PKBLocalizations.of(context);
+      TtsService().speak(_buildPrescriptionTts(loc));
     }
   }
 
@@ -98,12 +92,12 @@ class _CheckRestResultPageWidgetState extends State<PrescribedMedResultPageWidge
               excluding: true,
               child: Text(
                 'Prescription Result',
-                style: PillKaBooTheme.of(context).headlineMedium.override(
-                  fontFamily: PillKaBooTheme.of(context).headlineMediumFamily,
+                style: PehchanTheme.of(context).headlineMedium.override(
+                  fontFamily: PehchanTheme.of(context).headlineMediumFamily,
                   color: PKBAppState().secondaryColor,
                   fontSize: appBarFontSize,
                   fontWeight: FontWeight.bold,
-                  useGoogleFonts: GoogleFonts.asMap().containsKey(PillKaBooTheme.of(context).headlineMediumFamily),
+                  useGoogleFonts: GoogleFonts.asMap().containsKey(PehchanTheme.of(context).headlineMediumFamily),
                 ),
               ),
             ),
@@ -242,5 +236,46 @@ class _CheckRestResultPageWidgetState extends State<PrescribedMedResultPageWidge
         ),
       ),
     );
+  }
+
+  String _buildPrescriptionTts(PKBLocalizations loc) {
+    final slot = _localizedSlot(loc, PKBAppState().slotOfDay);
+    final takeTemplate = loc.getText('tts_prescription_take_slot').isNotEmpty
+        ? loc.getText('tts_prescription_take_slot')
+        : 'Take {slot}';
+    String message = takeTemplate.replaceAll('{slot}', slot);
+
+    if (PKBAppState().extractedDuration.isNotEmpty) {
+      final durationTemplate = loc.getText('tts_prescription_for_duration').isNotEmpty
+          ? loc.getText('tts_prescription_for_duration')
+          : 'for {duration}';
+      message += ' ${durationTemplate.replaceAll('{duration}', PKBAppState().extractedDuration)}';
+    }
+    if (PKBAppState().infoPrescribedDate.isNotEmpty) {
+      final dateTemplate = loc.getText('tts_prescription_date').isNotEmpty
+          ? loc.getText('tts_prescription_date')
+          : 'Prescribed on {date}';
+      message += '. ${dateTemplate.replaceAll('{date}', PKBAppState().infoPrescribedDate)}';
+    }
+    return message;
+  }
+
+  String _localizedSlot(PKBLocalizations loc, String slot) {
+    switch (slot.toLowerCase()) {
+      case 'morning':
+        return loc.getText('manual_rx_slot_morning').isNotEmpty
+            ? loc.getText('manual_rx_slot_morning')
+            : slot;
+      case 'noon':
+        return loc.getText('manual_rx_slot_noon').isNotEmpty
+            ? loc.getText('manual_rx_slot_noon')
+            : slot;
+      case 'night':
+        return loc.getText('manual_rx_slot_night').isNotEmpty
+            ? loc.getText('manual_rx_slot_night')
+            : slot;
+      default:
+        return slot;
+    }
   }
 }

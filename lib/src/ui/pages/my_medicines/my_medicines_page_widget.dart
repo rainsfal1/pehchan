@@ -4,11 +4,11 @@ import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
-import '../../../core/pillkaboo_util.dart';
+import '../../../core/pehchan_util.dart';
 import '../../../app/tts/tts_service.dart';
 import '../../../app/notification_service.dart';
 import '../../../utils/reminder_calculator.dart';
-import '../../styles/pillkaboo_theme.dart';
+import '../../styles/pehchan_theme.dart';
 import '../../widgets/index.dart' as widgets;
 import 'package:go_router/go_router.dart';
 
@@ -523,13 +523,13 @@ class _MyMedicinesPageWidgetState extends State<MyMedicinesPageWidget> {
               excluding: true,
               child: Text(
                 loc.getText('my_medicines'),
-                style: PillKaBooTheme.of(context).headlineMedium.override(
-                  fontFamily: PillKaBooTheme.of(context).headlineMediumFamily,
+                style: PehchanTheme.of(context).headlineMedium.override(
+                  fontFamily: PehchanTheme.of(context).headlineMediumFamily,
                   color: PKBAppState().secondaryColor,
                   fontSize: appBarFontSize,
                   fontWeight: FontWeight.bold,
                   useGoogleFonts: GoogleFonts.asMap().containsKey(
-                    PillKaBooTheme.of(context).headlineMediumFamily,
+                    PehchanTheme.of(context).headlineMediumFamily,
                   ),
                 ),
               ),
@@ -630,14 +630,11 @@ class _MyMedicinesPageWidgetState extends State<MyMedicinesPageWidget> {
                               label: '$medicineName, ${PKBAppState().formatInstructions(medicine)}, added ${_formatDate(addedDate)}',
                               onTap: () {
                                 if (!PKBAppState().useScreenReader && !PKBAppState().silentMode) {
+                                  final loc = PKBLocalizations.of(context);
                                   TtsService().stop();
-                                  String spokenText = medicineName;
-                                  if (PKBAppState().medicineHasInstructions(medicine)) {
-                                    spokenText += '. Take ${PKBAppState().formatInstructions(medicine)}';
-                                  } else {
-                                    spokenText += '. No schedule set';
-                                  }
-                                  TtsService().speak(spokenText);
+                                  TtsService().speak(
+                                    _buildMedicineTts(loc, medicine, medicineName),
+                                  );
                                 }
                               },
                               onLongPress: () {
@@ -646,14 +643,11 @@ class _MyMedicinesPageWidgetState extends State<MyMedicinesPageWidget> {
                               child: InkWell(
                                 onTap: () {
                                   if (!PKBAppState().useScreenReader && !PKBAppState().silentMode) {
+                                    final loc = PKBLocalizations.of(context);
                                     TtsService().stop();
-                                    String spokenText = medicineName;
-                                    if (PKBAppState().medicineHasInstructions(medicine)) {
-                                      spokenText += '. Take ${PKBAppState().formatInstructions(medicine)}';
-                                    } else {
-                                      spokenText += '. No schedule set';
-                                    }
-                                    TtsService().speak(spokenText);
+                                    TtsService().speak(
+                                      _buildMedicineTts(loc, medicine, medicineName),
+                                    );
                                   }
                                 },
                                 onLongPress: () {
@@ -715,17 +709,25 @@ class _MyMedicinesPageWidgetState extends State<MyMedicinesPageWidget> {
                                             excluding: true,
                                             child: Builder(
                                               builder: (context) {
+                                                final loc = PKBLocalizations.of(context);
                                                 final nextTime = ReminderCalculator.getNextReminderTime(medicine);
                                                 if (nextTime != null) {
-                                                  final timeUntil = ReminderCalculator.formatTimeUntil(nextTime);
+                                                  final timeUntil = ReminderCalculator.formatTimeUntil(
+                                                    nextTime,
+                                                    localeCode: loc.languageCode,
+                                                  );
                                                   return Text(
-                                                    timeUntil == 'now' ? 'Dose due now' : 'Next dose in $timeUntil',
+                                                    timeUntil.isNow
+                                                        ? 'Dose due now'
+                                                        : 'Next dose in ${timeUntil.text}',
                                                     style: TextStyle(
-                                                      color: timeUntil == 'now'
+                                                      color: timeUntil.isNow
                                                           ? Colors.red
                                                           : PKBAppState().secondaryColor.withOpacity(0.8),
                                                       fontSize: secondaryTextSize - 1,
-                                                      fontWeight: timeUntil == 'now' ? FontWeight.bold : FontWeight.w500,
+                                                      fontWeight: timeUntil.isNow
+                                                          ? FontWeight.bold
+                                                          : FontWeight.w500,
                                                     ),
                                                   );
                                                 }
@@ -870,5 +872,65 @@ class _MyMedicinesPageWidgetState extends State<MyMedicinesPageWidget> {
         ),
       ),
     );
+  }
+
+  String _buildMedicineTts(
+    PKBLocalizations loc,
+    Map<String, dynamic> medicine,
+    String medicineName,
+  ) {
+    String spokenText = medicineName;
+    if (PKBAppState().medicineHasInstructions(medicine)) {
+      final instructions = _formatInstructionsForTts(loc, medicine);
+      final template = loc.getText('tts_take_instructions').isNotEmpty
+          ? loc.getText('tts_take_instructions')
+          : 'Take {instructions}';
+      spokenText += '. ${template.replaceAll('{instructions}', instructions)}';
+    } else {
+      final noSchedule = loc.getText('no_schedule_set').isNotEmpty
+          ? loc.getText('no_schedule_set')
+          : 'no schedule set';
+      spokenText += '. $noSchedule';
+    }
+    return spokenText;
+  }
+
+  String _formatInstructionsForTts(
+    PKBLocalizations loc,
+    Map<String, dynamic> medicine,
+  ) {
+    final instructions = medicine['instructions'] as Map<String, dynamic>?;
+    if (instructions == null) return '';
+    final slots = instructions['slotOfDay'] as List? ?? [];
+    final duration = instructions['duration'] as String?;
+    final localizedSlots = slots
+        .map((slot) => _localizedSlot(loc, slot.toString()))
+        .where((slot) => slot.isNotEmpty)
+        .toList();
+    final joiner = loc.languageCode == 'ur' ? ' اور ' : ' & ';
+    String text = localizedSlots.join(joiner);
+    if (duration != null && duration.isNotEmpty) {
+      text += ' • $duration';
+    }
+    return text.isNotEmpty ? text : PKBAppState().formatInstructions(medicine);
+  }
+
+  String _localizedSlot(PKBLocalizations loc, String slot) {
+    switch (slot.toLowerCase()) {
+      case 'morning':
+        return loc.getText('manual_rx_slot_morning').isNotEmpty
+            ? loc.getText('manual_rx_slot_morning')
+            : slot;
+      case 'noon':
+        return loc.getText('manual_rx_slot_noon').isNotEmpty
+            ? loc.getText('manual_rx_slot_noon')
+            : slot;
+      case 'night':
+        return loc.getText('manual_rx_slot_night').isNotEmpty
+            ? loc.getText('manual_rx_slot_night')
+            : slot;
+      default:
+        return slot;
+    }
   }
 }

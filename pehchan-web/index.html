@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Pehchan – Accessible Medication & Parenting Aid</title>
+
+  <meta name="description"
+    content="Pehchan is an accessible medication and parenting assistant designed for blind and visually impaired parents. It reads medicine labels aloud, guides accurate dosage, tracks remaining liquid, and supports bilingual (English/Urdu) audio guidance.">
+  <meta name="keywords"
+    content="Pehchan, accessible parenting, blind parents, visually impaired, medication assistant, audio dosage, Urdu, accessibility, screen reader friendly">
+  <meta name="author" content="Pehchan Team">
+  <meta name="theme-color" content="#0a0a0a">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Pehchan – Accessible Medication & Parenting Aid">
+  <meta property="og:description"
+    content="Audio-first medication guidance, dosage assistance, and bilingual support so blind and visually impaired parents can manage child medication safely and independently.">
+  <meta property="og:url" content="https://pehchan.app/">
+  <!-- Replace with your deployed URL -->
+  <meta property="og:image" content="https://pehchan.app/og-image.png">
+  <!-- Replace with your social preview image -->
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pehchan – Accessible Medication & Parenting Aid">
+  <meta name="twitter:description"
+    content="Audio-first medication guidance, dosage assistance, and bilingual support for blind and visually impaired parents.">
+  <meta name="twitter:image" content="pehchan-logo.png">
+
+  <link rel="icon" type="image/png" href="pehchan-logo.png">
+  <link rel="apple-touch-icon" href="pehchan-logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Lexend:wght@300;400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+
+  <!-- Floating Header -->
+  <header class="header">
+    <div class="logo" data-i18n="logo">PEHCHAN.</div>
+    <div class="header-links">
+      <a href="https://www.dra.gov.pk/" target="_blank" rel="noopener noreferrer" class="nav-link">
+        <i data-lucide="shield"></i>
+        <span data-i18n="header_drap">DRAP</span>
+      </a>
+      <a href="https://github.com/rainsfal1/pehchan" target="_blank" rel="noopener noreferrer" class="nav-link">
+        <i data-lucide="github"></i>
+        <span data-i18n="header_source">SOURCE</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Minimalist Hero Section -->
+  <section class="section hero centered-hero">
+    <div class="container fade-up"
+      style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+
+      <h1 class="hero-title" data-i18n="hero_title"
+        style="font-size: clamp(3rem, 7vw, 7rem); margin-bottom: 1.5rem; letter-spacing: -0.05em;">
+        ACCESSIBLE<br><span class="text-gray">PARENTING.</span></h1>
+
+      <p class="hero-desc" data-i18n="hero_desc"
+        style="max-width: 800px; margin: 0 auto 2rem auto; font-size: clamp(1rem, 1.3vw, 1.4rem); line-height: 1.5;">
+        Reducing the risks of giving wrong or expired medication. Audio guidance for educated choices. Empowering blind
+        and visually impaired parents with true independence.
+      </p>
+
+      <div class="hero-actions">
+        <button class="btn-primary"
+          onclick="document.querySelector('.features-wrapper').scrollIntoView({behavior: 'smooth'})">
+          <span data-i18n="discover_btn">DISCOVER FEATURES</span>
+          <div class="btn-arrow">↓</div>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Core Features as Stories -->
+  <div class="features-wrapper">
+
+    <!-- Feature 1 -->
+    <section class="section feature-story border-top">
+      <div class="feature-layout container">
+        <div class="feature-content fade-up">
+          <div class="feature-info">
+            <h3 class="feature-headline" data-i18n="instant_title">INSTANT<br>RECOGNITION.</h3>
+            <p class="feature-body" data-i18n="instant_desc">Point your camera. Our integrated Google ML Kit identifies
+              the package and reads
+              aloud
+              the medication name, usage, precautions, and flags any registered childhood allergies.</p>
+          </div>
+        </div>
+        <div class="feature-visual fade-left">
+          <div class="ui-mockup">
+            <div class="ui-viewfinder">
+              <div class="ui-corner top-left"></div>
+              <div class="ui-corner top-right"></div>
+              <div class="ui-corner bottom-left"></div>
+              <div class="ui-corner bottom-right"></div>
+              <div class="ui-pill pulse" data-i18n="ui_pill_detected">MEDICATION DETECTED</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature 2 (Formerly Feature 5: Customized Settings) -->
+    <section class="section feature-story border-top" id="customized-settings">
+      <div class="feature-layout container">
+        <div class="feature-content fade-up">
+          <div class="feature-info">
+            <h3 class="feature-headline" data-i18n="settings_title">CUSTOMIZED<br>SETTINGS.</h3>
+            <p class="feature-body" data-i18n="settings_desc">Tailor the app to your specific visibility contour colors
+              and proactively register
+              your child's allergies for AI-driven safety warnings.</p>
+          </div>
+        </div>
+        <div class="feature-visual fade-left">
+
+          <div class="ui-mockup interactive-slideshow">
+            <!-- Slide Container -->
+            <div class="slideshow-track" id="settings-track">
+
+              <!-- Slide 1: Theme -->
+              <div class="slide slide-theme">
+                <h4 class="slide-title" data-i18n="slide_theme_title">VISIBILITY THEME</h4>
+                <div class="theme-buttons">
+                  <button class="theme-btn theme-black active" onclick="setTheme('black')"
+                    aria-label="Black Theme"></button>
+                  <button class="theme-btn theme-white" onclick="setTheme('white')" aria-label="White Theme"></button>
+                  <button class="theme-btn theme-blue" onclick="setTheme('blue')" aria-label="Blue Theme"></button>
+                </div>
+              </div>
+
+              <!-- Slide 2: Screen Reader -->
+              <div class="slide slide-reader">
+                <h4 class="slide-title" data-i18n="slide_audio_title">AUDIO CUES</h4>
+                <div class="reader-control">
+                  <span class="reader-label" data-i18n="slide_speed_label">SPEED</span>
+                  <input type="range" id="speech-speed" min="0.5" max="2" value="1" step="0.1" class="custom-slider">
+                  <span class="reader-value" id="speed-display">1.0x</span>
+                </div>
+                <button class="test-audio-btn" onclick="testAudio()" data-i18n="slide_test_btn">TEST AUDIO</button>
+              </div>
+
+              <!-- Slide 3: Language -->
+              <div class="slide slide-language">
+                <h4 class="slide-title" data-i18n="slide_lang_title">SYSTEM LANGUAGE</h4>
+                <div class="lang-buttons">
+                  <button class="lang-btn active" id="lang-en" onclick="setLanguage('en')" data-no-translate="true">ENGLISH</button>
+                  <button class="lang-btn" id="lang-ur" onclick="setLanguage('ur')" data-no-translate="true">اردو</button>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Clean Styled Navigation Buttons -->
+            <button class="slide-nav slide-prev" onclick="changeSlide(-1)" aria-label="Previous">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 16L6 10L12 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button class="slide-nav slide-next" onclick="changeSlide(1)" aria-label="Next">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 4L14 10L8 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature 3 - Reversed Layout -->
+    <section class="section feature-story border-top">
+      <div class="feature-layout container feature-layout-reverse">
+        <div class="feature-visual fade-right">
+          <div class="ui-mockup">
+            <div class="ui-scanner">
+              <div class="ui-doc-line w-long"></div>
+              <div class="ui-doc-line w-short"></div>
+              <div class="ui-doc-line w-long"></div>
+              <div class="ui-laser scan-down"></div>
+            </div>
+          </div>
+        </div>
+        <div class="feature-content fade-up">
+          <div class="feature-info">
+            <h3 class="feature-headline" data-i18n="timely_title">TIMELY<br>PRESCRIPTIONS.</h3>
+            <p class="feature-body" data-i18n="timely_desc">Never miss a dose. Scanning pharmacy labels instantly
+              translates printed schedules
+              into scheduled morning, afternoon, or evening audio reminders.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature 4 -->
+    <section class="section feature-story border-top">
+      <div class="feature-layout container">
+        <div class="feature-content fade-up">
+          <div class="feature-info">
+            <h3 class="feature-headline" data-i18n="remaining_title">REMAINING<br>LIQUID.</h3>
+            <p class="feature-body" data-i18n="remaining_desc">Double-check your poured amount or track inventory for
+              future usage. Pehchan
+              precisely
+              calculates and aurally reports how much liquid medication remains in a container.</p>
+          </div>
+        </div>
+        <div class="feature-visual fade-left">
+          <div class="ui-mockup">
+            <div class="ui-bottle">
+              <div class="ui-bottle-neck"></div>
+              <div class="ui-bottle-body">
+                <div class="ui-liquid fill-up"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature 5 - Reversed Layout -->
+    <section class="section feature-story border-top">
+      <div class="feature-layout container feature-layout-reverse">
+        <div class="feature-visual fade-right">
+          <div class="ui-mockup">
+            <div class="ui-slider-container">
+              <div class="ui-slider-track">
+                <div class="ui-slider-fill grow-up"></div>
+                <div class="ui-slider-handle"></div>
+              </div>
+              <div class="ui-slider-value" data-i18n="ui_slider_pouring">POURING 4.5mL / 5.0mL</div>
+            </div>
+          </div>
+        </div>
+        <div class="feature-content fade-up">
+          <div class="feature-info">
+            <h3 class="feature-headline" data-i18n="audio_title">AUDIO<br>DOSAGE.</h3>
+            <p class="feature-body" data-i18n="audio_desc">Adjust a digital slider, and start pouring. Our on-device,
+              edge-deployed YOLO model
+              (TensorFlow Lite) tracks the liquid level in real-time, guiding your pour with precise audio tones.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Tech Specs -->
+  <section class="section specs border-top">
+    <div class="container fade-up">
+      <div class="specs-grid">
+        <div class="spec-col">
+          <h4 class="spec-title" data-i18n="spec_stack_title">STACK</h4>
+          <ul class="spec-list">
+            <li>Flutter</li>
+            <li>Go (Cloud Functions)</li>
+            <li>TensorFlow Lite</li>
+            <li>SQLite</li>
+          </ul>
+        </div>
+        <div class="spec-col">
+          <h4 class="spec-title" data-i18n="spec_impact_title">IMPACT</h4>
+          <ul class="spec-list text-gray">
+            <li data-i18n="spec_impact_sdg3">SDG 3: Good Health</li>
+            <li data-i18n="spec_impact_sdg4">SDG 4: Quality Tech Ed</li>
+            <li data-i18n="spec_impact_sdg10">SDG 10: Reduced Inequalities</li>
+          </ul>
+        </div>
+        <div class="spec-col">
+          <h4 class="spec-title" data-i18n="spec_accessibility_title">ACCESSIBILITY</h4>
+          <ul class="spec-list text-gray">
+            <li data-i18n="spec_accessibility_voice">Voice Guidance</li>
+            <li data-i18n="spec_accessibility_offline">Offline-First</li>
+            <li data-i18n="spec_accessibility_haptic">Haptic Feedback</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer CTA -->
+  <footer class="footer border-top">
+    <div class="container text-center fade-up">
+      <h2 class="massive-text mb-lg" data-i18n="footer_title">EXPLORE<br>THE ARCHITECTURE.</h2>
+      <a href="https://github.com/rainsfal1/pehchan" target="_blank" rel="noopener noreferrer" class="btn-clean">
+        <i data-lucide="github"></i>
+        <span data-i18n="footer_github">GITHUB REPOSITORY</span>
+      </a>
+      <div class="footer-bottom">
+        <span data-i18n="footer_copyright">© 2025 Rainsfall. Designed for purpose.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

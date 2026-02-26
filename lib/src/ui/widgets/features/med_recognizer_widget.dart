@@ -1,4 +1,4 @@
-import '../../../core/pillkaboo_util.dart';
+import '../../../core/pehchan_util.dart';
 import '../../../app/global_audio_player.dart';
 import '../../../app/tts/tts_service.dart';
 import '../views/detector_view.dart';
@@ -38,21 +38,21 @@ class _MedRecognizerWidgetState extends State<MedRecognizerWidget> {
 
   final _textRecognizer = TextRecognizer(script: TextRecognitionScript.latin);
   final BarcodeScanner _barcodeScanner = BarcodeScanner();
-  bool _canProcess = true; // 이미지 처리 가능 여부
-  bool _isBusy = false; // 이미지 처리 중 여부
-  CustomPaint? _customPaint; // 이미지에 그려질 CustomPaint
+  bool _canProcess = true; 
+  bool _isBusy = false; 
+  CustomPaint? _customPaint; 
 
-  String? _recognizedBarcode; // 인식된 바코드
+  String? _recognizedBarcode; 
   String? _recognizedText;
 
-  var _cameraLensDirection = CameraLensDirection.back; // 카메라 렌즈 방향
+  var _cameraLensDirection = CameraLensDirection.back; 
 
-  bool _isDateRecognized = false; // 날짜 인식 여부
-  bool _isBarcodeRecognized = false; // 바코드 인식 여부
+  bool _isDateRecognized = false; 
+  bool _isBarcodeRecognized = false; 
 
   String _medTitle = "";
   String _exprDate = "";
-  Map<String, dynamic> _medicineInfo = {}; // 약 정보
+  Map<String, dynamic> _medicineInfo = {}; 
   final Map<String, List<String>> _synonymMap = {
     'paracetamol': ['acetaminophen', 'panadol'],
     'ibuprofen': ['advil', 'nurofen'],
@@ -199,10 +199,18 @@ class _MedRecognizerWidgetState extends State<MedRecognizerWidget> {
           Map<String, String?>? parsedGS1;
           if (barcode.format == BarcodeFormat.dataMatrix || GS1Parser.isGS1Format(recognizedBarcode)) {
             parsedGS1 = GS1Parser.parseDataMatrix(recognizedBarcode);
+            final loc = PKBLocalizations.of(context);
+
+            // Debug: Print what was scanned
+            print('DataMatrix detected: $recognizedBarcode');
+            print('Parsed: ${parsedGS1.toString()}');
 
             // Provide TTS feedback for DataMatrix detection
             if (!PKBAppState().useScreenReader) {
-              TtsService().speak('DataMatrix detected');
+              final message = loc.getText('tts_datamatrix_detected').isNotEmpty
+                  ? loc.getText('tts_datamatrix_detected')
+                  : 'DataMatrix detected';
+              TtsService().speak(message);
             }
 
             // If expiry date found in DataMatrix, prefer it over OCR
@@ -217,12 +225,16 @@ class _MedRecognizerWidgetState extends State<MedRecognizerWidget> {
 
               // Announce expiry date via TTS
               if (!PKBAppState().useScreenReader) {
-                TtsService().speak('Expiry date detected from barcode');
+                final message = loc.getText('tts_expiry_from_barcode').isNotEmpty
+                    ? loc.getText('tts_expiry_from_barcode')
+                    : 'Expiry date detected from barcode';
+                TtsService().speak(message);
               }
             }
           }
 
           final matches = await BarcodeDBHelper.searchByBarcode(recognizedBarcode);
+          print('Database search for "$recognizedBarcode" returned ${matches.length} matches');
           if (matches.isNotEmpty) {
             if (mounted) {
               setState(() {

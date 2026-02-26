@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '/index.dart';
-import '../core/pillkaboo_util.dart';
+import '../core/pehchan_util.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';

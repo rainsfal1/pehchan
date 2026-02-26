@@ -1,5 +1,5 @@
-import '../../../../../core/pillkaboo_util.dart';
-import '../../../../styles/pillkaboo_theme.dart';
+import '../../../../../core/pehchan_util.dart';
+import '../../../../styles/pehchan_theme.dart';
 import '../../../../widgets/index.dart' as widgets;
 
 import 'package:flutter/material.dart';
@@ -329,13 +329,13 @@ class _ManualPrescriptionPageWidgetState extends State<ManualPrescriptionPageWid
                 loc.getText('manual_rx_title').isNotEmpty
                     ? loc.getText('manual_rx_title')
                     : 'Add prescription',
-                style: PillKaBooTheme.of(context).headlineMedium.override(
-                      fontFamily: PillKaBooTheme.of(context).headlineMediumFamily,
+                style: PehchanTheme.of(context).headlineMedium.override(
+                      fontFamily: PehchanTheme.of(context).headlineMediumFamily,
                       color: PKBAppState().secondaryColor,
                       fontSize: appBarFontSize,
                       fontWeight: FontWeight.bold,
                       useGoogleFonts: GoogleFonts.asMap().containsKey(
-                        PillKaBooTheme.of(context).headlineMediumFamily,
+                        PehchanTheme.of(context).headlineMediumFamily,
                       ),
                     ),
               ),

@@ -1,4 +1,4 @@
-import '../../../core/pillkaboo_util.dart';
+import '../../../core/pehchan_util.dart';
 import '../../../app/global_audio_player.dart';
 import '../views/detector_view.dart';
 import '../views/text_detector_painter.dart';

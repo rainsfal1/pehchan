@@ -1,8 +1,8 @@
-import '../../../../core/pillkaboo_model.dart';
+import '../../../../core/pehchan_model.dart';
 import 'control_tts_page_widget.dart' show ControlTTSPageWidget;
 import 'package:flutter/material.dart';
 
-class ControlTTSPageModel extends PillKaBooModel<ControlTTSPageWidget> {
+class ControlTTSPageModel extends PehchanModel<ControlTTSPageWidget> {
 
   final unfocusNode = FocusNode();
 
